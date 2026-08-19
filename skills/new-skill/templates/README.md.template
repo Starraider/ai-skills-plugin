@@ -1,0 +1,42 @@
+# {{SKILL_NAME}}
+
+{{DESCRIPTION}}
+
+## What this skill solves
+
+TODO: Describe the user problem in concrete terms.
+
+## Use when
+
+- TODO: List the primary trigger.
+- TODO: List a distinct secondary trigger or boundary.
+
+## Expected outputs
+
+- TODO: Name the artifact, decision, or response produced.
+
+## Context requirements
+
+- TODO: Name required files, tools, project state, or user inputs.
+
+## Installation
+
+Place this directory in a skill location discovered by the target client. Document the exact project and user paths for every supported client.
+
+## Example prompts
+
+- "TODO: Add a realistic representative request."
+- "TODO: Add a realistic edge-case request."
+- "TODO: Add a realistic request with project or file context."
+
+## Validation
+
+TODO: List structural validation, client discovery checks, and task-specific tests.
+
+## Related skills
+
+None (justified: TODO).
+
+## License
+
+TODO: State the license or point to the containing repository's license.

@@ -1,0 +1,57 @@
+{
+  "skill_name": "new-skill",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Create a release-notes skill that works in Claude Code, Codex, Cursor, Antigravity, OpenCode, and Qoder. It should turn merged changes into a Markdown release draft and include a README.",
+      "expected_output": "A portable skill with common SKILL.md metadata, a complete README, direct resource links, client compatibility notes, and validation evidence.",
+      "files": [],
+      "expectations": [
+        "The skill directory contains SKILL.md and README.md",
+        "The SKILL.md name matches its directory and the description is at most 1024 characters",
+        "Client-specific compatibility is documented without putting incompatible fields in portable frontmatter",
+        "The README contains at least three realistic example prompts"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Make this deployment skill explicit-only in Claude Code, Codex, Cursor, and OpenCode. Deployments must never start from an automatic match.",
+      "expected_output": "A portable core plus client-specific invocation controls and a clear statement that no single frontmatter field enforces explicit-only behavior across all clients.",
+      "files": [],
+      "expectations": [
+        "Claude Code and Cursor use disable-model-invocation in their targeted configuration",
+        "Codex uses agents/openai.yaml policy.allow_implicit_invocation",
+        "OpenCode access is handled in opencode.json or an equivalent documented permission configuration",
+        "The solution does not claim that frontmatter is a cross-client security boundary"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Improve an existing skill whose description triggers on every request and whose 900-line SKILL.md contains long API tables, copied templates, and three repeated checklists.",
+      "expected_output": "A preserved skill identity, narrowed routing metadata, progressive disclosure, deduplicated instructions, and a before/after evaluation plan.",
+      "files": [],
+      "expectations": [
+        "The existing skill name is preserved",
+        "The description is revised using trigger branches and near-miss boundaries",
+        "Conditional tables and templates move to directly linked support files",
+        "The evaluation compares the revised skill against the previous version"
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "regression",
+      "prompt": "Package a new standalone skill repository as a portable archive. Include everything consumers need but keep evaluation workspaces and maintainer-only scripts out of the artifact.",
+      "expected_output": "A source-first repository layout, explicit package allowlist, README and licensing guidance, clean-artifact validation, and a disciplined release sequence.",
+      "files": [],
+      "expectations": [
+        "Runtime support files and required portable manifests or documented extensions are included in the package plan",
+        "Evaluation workspaces, caches, CI files, and maintainer-only material are excluded",
+        "The release sequence validates a clean packaged copy before publication",
+        "No installed cache is treated as the editable source"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "skill_name": "new-prompt",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Create a reusable prompt for an LLM that implements a Python 3.13 function from a feature description. The generated prompt should make the model return a unified diff, add pytest coverage, avoid new dependencies, and say when a requirement is missing instead of guessing.",
+      "expected_output": "A paste-ready code-generation message set with explicit placeholders, requirements, constraints, acceptance criteria, output format, verification rules, and conditional model settings.",
+      "files": [],
+      "expectations": [
+        "The result separates stable coding behavior from the variable feature request or clearly structures them in one prompt",
+        "The prompt contains visible placeholders for feature details, repository context, and acceptance criteria",
+        "The prompt requires a unified diff, pytest coverage, no new dependencies, and explicit handling of missing requirements",
+        "The settings distinguish reasoning or effort from classic sampling controls and label provider-dependent values",
+        "The prompt does not require disclosure of private chain-of-thought"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Rewrite my production support-ticket summarizer prompt. Tickets can contain malicious text like 'ignore your rules'. The output feeds an API and must be strict JSON with issue, impact, suspected_cause, evidence_ids, and needs_human_review. It may use only the supplied ticket events, must not invent a cause, and should return null when evidence is missing. Include a compact A/B evaluation plan.",
+      "expected_output": "A secure, grounded summarization prompt with privileged instructions separated from untrusted ticket data, a strict output contract, an uncertainty policy, and measurable A/B tests.",
+      "files": [],
+      "expectations": [
+        "Untrusted ticket content is placed in a user-data section rather than interpolated into a system or developer message",
+        "The prompt states that embedded ticket instructions cannot override the task",
+        "The output contract defines all five requested fields and represents unsupported causes as null",
+        "The prompt grounds claims in evidence_ids and defines human-review behavior",
+        "The evaluation plan compares the same representative and adversarial cases and tracks schema validity, unsupported-claim rate, latency, and token usage"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Polish this prompt specifically for Google Stitch so it generates a responsive fintech landing page with a dark visual system: 'make me a modern bank website'.",
+      "expected_output": "The new-prompt skill stays out of scope and routes the request to an installed Stitch-focused skill when available.",
+      "files": [],
+      "expectations": [
+        "The request is identified as Stitch-specific rather than handled as a general LLM prompt",
+        "The response directs the task to an available Stitch-focused skill without claiming this package includes one or duplicating its UI-specific workflow"
+      ]
+    }
+  ]
+}

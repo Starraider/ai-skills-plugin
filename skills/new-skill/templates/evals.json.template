@@ -1,0 +1,35 @@
+{
+  "skill_name": "{{SKILL_NAME}}",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Representative user request",
+      "expected_output": "Observable description of a successful result",
+      "files": [],
+      "expectations": [
+        "A specific, independently verifiable property of the result"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Consequential edge-case request",
+      "expected_output": "Safe and correct edge-case behavior",
+      "files": [],
+      "expectations": [
+        "The output handles the edge case without hiding a limitation"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Boundary or near-miss request",
+      "expected_output": "The skill clarifies, refuses, or stays out of scope as designed",
+      "files": [],
+      "expectations": [
+        "The response respects the documented capability boundary"
+      ]
+    }
+  ]
+}

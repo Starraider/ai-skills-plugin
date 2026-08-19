@@ -1,0 +1,32 @@
+---
+name: {{SKILL_NAME}}
+description: {{DESCRIPTION}}
+---
+
+# {{SKILL_TITLE}}
+
+## Outcome
+
+TODO: State the result this skill produces and its boundary.
+
+## Workflow
+
+1. Inspect the provided context and resolve only material ambiguity.
+
+   Completion: required inputs, constraints, and output format are known.
+
+2. Perform the capability-specific work.
+
+   Completion: TODO: replace with an objective, exhaustive criterion.
+
+3. Verify the output with the project's existing checks.
+
+   Completion: checks pass or the remaining limitation is reported with evidence.
+
+## Safety
+
+TODO: State permissions, side effects, destructive operations, and refusal boundaries. Remove this section only if the skill is genuinely read-only and low risk.
+
+## Resources
+
+TODO: Link each required `references/`, `scripts/`, `templates/`, or `assets/` file directly. Remove this section when the skill has no support files.

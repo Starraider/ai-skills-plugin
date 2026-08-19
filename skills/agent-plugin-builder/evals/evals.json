@@ -1,0 +1,60 @@
+{
+  "skill_name": "agent-plugin-builder",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Create an Agent Plugins 1.0 package named acme.release-tools with version 0.1.0, a release-notes Agent Skill, and a bundled stdio MCP server launched from ./bin/release-tools. The server needs persistent cache storage.",
+      "expected_output": "A conforming plugin directory with a closed manifest, an immediately discoverable Agent Skill, and a root MCP configuration that uses PLUGIN_DATA for persistent state.",
+      "files": [],
+      "expectations": [
+        "plugin.json uses the canonical Agent Plugins 1.0.0 schema and contains no inline component fields",
+        "The Skill is located at skills/release-notes/SKILL.md and follows Agent Skills naming and description rules",
+        "mcp.json declares a stdio server whose command is ./bin/release-tools and whose cache path uses ${PLUGIN_DATA}",
+        "The output separates command from args and contains no package-visible credentials",
+        "The bundled validator passes on the produced package"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "regression",
+      "prompt": "Migrate this client-specific plugin to Agent Plugins 1.0. It has two valid skills, inline MCP configuration, custom agents, hooks, and client discovery metadata. Keep the existing client working while adding the portable package.",
+      "expected_output": "An additive migration that moves only Skills and converted MCP entries into the portable core and preserves client-native capabilities until compatibility testing succeeds.",
+      "files": [],
+      "expectations": [
+        "The portable root manifest contains only Agent Plugins 1.0.0 fields",
+        "Skills become immediate children of skills/ and MCP configuration moves to root mcp.json with explicit transports",
+        "Agents, hooks, and client discovery metadata remain in a documented client integration rather than becoming portable top-level fields",
+        "The migration does not delete working legacy files before target-client verification",
+        "Validation results distinguish portable conformance from client-extension testing"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "edge-case",
+      "prompt": "Add a portable Streamable HTTP MCP server at http://api.example.com/mcp with an Authorization bearer token embedded in mcp.json, and put a hooks field at the top level of plugin.json.",
+      "expected_output": "The skill rejects the insecure and non-conforming details, uses HTTPS for the non-loopback endpoint, keeps authentication client-managed, and places hooks only in a documented client extension if one exists.",
+      "files": [],
+      "expectations": [
+        "The resulting non-loopback MCP URL uses HTTPS",
+        "No Authorization token or other credential is embedded in headers or env",
+        "plugin.json has no top-level hooks field",
+        "The response does not invent an extension namespace or undocumented hooks contract",
+        "The validator reports no structural errors or secret warnings for the corrected package"
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "near-miss",
+      "prompt": "Install and enable this already-valid Agent Plugin in my proprietary client and configure its account permissions.",
+      "expected_output": "The skill identifies installation, enablement, account configuration, and permissions as client-owned behavior and does not invent portable Agent Plugins fields or unverified client steps.",
+      "files": [],
+      "expectations": [
+        "The response distinguishes portable package validation from client installation and enablement",
+        "No unsupported manifest fields or extension namespace are invented",
+        "The user is directed to the proprietary client's authoritative integration surface",
+        "The response does not claim the plugin is installed, trusted, or enabled"
+      ]
+    }
+  ]
+}
