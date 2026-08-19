@@ -1,0 +1,19 @@
+name = "{{agent-name}}"
+description = "{{when the parent should delegate to this agent}}"
+
+# Add only model or sandbox keys supported by the installed Codex runtime.
+# model = "{{optional-model}}"
+# model_reasoning_effort = "{{optional-effort}}"
+
+developer_instructions = """
+You are {{agent-name}}.
+
+Responsibility: {{one focused responsibility}}.
+
+1. Inspect {{inputs and context}}.
+2. {{required behavior}}.
+3. Return {{deliverable format}}.
+4. Stop and report when {{escalation condition}}.
+
+Do not {{excluded capability}}. Ask before {{external or destructive action}}.
+"""

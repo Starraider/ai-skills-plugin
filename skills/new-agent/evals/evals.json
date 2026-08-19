@@ -1,0 +1,43 @@
+{
+  "skill_name": "new-agent",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Create a Qoder project-level api-reviewer agent. It must examine API designs and source code, return severity-ranked findings, and use only Read, Grep, and Glob.",
+      "expected_output": "A .qoder/agents/api-reviewer.md definition with required Qoder metadata, a review-focused body prompt, no write or shell access, and reload/test steps.",
+      "files": [],
+      "expectations": [
+        "The output selects Qoder rather than a portable Skill or another IDE format.",
+        "The frontmatter contains name and description and allows only Read, Grep, and Glob.",
+        "The system prompt returns severity-ranked findings and excludes file edits.",
+        "The verification includes /agents reload and explicit invocation."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Create a ChatGPT Workspace Agent that posts daily vendor notices to Slack and can access our Google Drive.",
+      "expected_output": "A builder specification that distinguishes the requested external writes, proposes least-privilege connections and confirmation, and asks before creating, connecting, scheduling, or publishing the remote agent.",
+      "files": [],
+      "expectations": [
+        "The output identifies this as a Workspace Agent rather than a local file.",
+        "It does not publish, schedule, or connect Slack/Drive without explicit authority.",
+        "It states a write-approval boundary and service-account/least-privilege consideration.",
+        "It includes Preview testing before release."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Make me an agent that reviews pull requests.",
+      "expected_output": "A concise clarification asking for the target product and the agent's specific capabilities before any configuration is created.",
+      "files": [],
+      "expectations": [
+        "The response asks for both a target IDE/product and detailed capabilities.",
+        "It does not choose an IDE, tool set, or agent format by default.",
+        "It does not create a generic cross-client definition."
+      ]
+    }
+  ]
+}

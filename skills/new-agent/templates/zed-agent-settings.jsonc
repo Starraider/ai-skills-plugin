@@ -1,0 +1,30 @@
+// Native Zed Agent profile: add under `agent.profiles` in settings.json.
+{
+  "agent": {
+    "profiles": {
+      "{{agent-name}}": {
+        "name": "{{Agent Name}}",
+        "tools": {
+          "read_file": true,
+          "grep": true,
+          "terminal": false,
+          "edit_file": false
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    }
+  }
+}
+
+// External ACP agent: top-level `agent_servers` entry in settings.json.
+{
+  "agent_servers": {
+    "{{agent-name}}": {
+      "type": "custom",
+      "command": "{{verified-agent-binary}}",
+      "args": ["{{argument-if-needed}}"],
+      "env": {}
+    }
+  }
+}

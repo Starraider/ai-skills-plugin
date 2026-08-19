@@ -1,11 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-skills-plugin",
-  "description": "Portable Agent Skills for prompt design, skill authoring, and Agent Plugin creation.",
+  "description": "Portable Agent Skills for prompt design, IDE-native agent creation, skill authoring, and Agent Plugin creation.",
   "keywords": [
     "agent-skills",
     "agent-plugins",
     "prompt-engineering",
-    "skill-authoring"
+    "skill-authoring",
+    "agent-creation"
   ]
 }
