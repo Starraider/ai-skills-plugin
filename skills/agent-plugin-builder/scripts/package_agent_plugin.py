@@ -151,8 +151,6 @@ def run_validation(root: Path, strict: bool = True) -> None:
                 "--clients",
                 CLIENTS,
                 "--strict-portable",
-                "--documentation-profile",
-                "bundled",
             ],
             check=True,
         )

@@ -36,13 +36,13 @@ Produce a self-contained Agent Plugins 1.0.0 directory whose portable components
 
 3. Add only the components the plugin needs.
 
-   Put each Agent Skill in an immediate child directory at `skills/<skill-name>/SKILL.md` and follow the Agent Skills specification. Keep its scripts, references, assets, and other skill-owned files within that skill directory.
+   Put each Agent Skill in an immediate child directory at `skills/<skill-name>/SKILL.md` and follow the Agent Skills specification. Every Skill must include its own detailed `README.md`; keep its scripts, references, assets, and other skill-owned files within that skill directory. Keep the root plugin README to plugin-wide guidance and a concise linked summary of each Skill.
 
    When MCP is requested, read [the MCP configuration reference](references/mcp-servers.md) before creating root `mcp.json`. Use explicit transports, separate the executable `command` from `args`, use only the portable plugin variables in supported fields, and never put credentials in package-visible configuration.
 
    When a required capability is client-specific, read [the client extension reference](references/client-extensions.md). Add only namespaces and fields documented by the owning client. Do not invent a namespace contract.
 
-   Completion: every Skill is directly discoverable, every MCP entry matches one closed transport variant, and every non-portable capability is isolated from the portable core.
+   Completion: every Skill is directly discoverable and has a detailed local README, every MCP entry matches one closed transport variant, and every non-portable capability is isolated from the portable core.
 
 4. Validate structure and behavior.
 
@@ -54,7 +54,7 @@ Produce a self-contained Agent Plugins 1.0.0 directory whose portable components
 
    Also validate every discovered Agent Skill with `skills-ref validate` or the repository's existing skill validator when available. Exercise bundled stdio commands from the declared working directory and test remote MCP endpoints only when the user has authorized the connection. Test each target client's extension separately.
 
-   Completion: structural checks pass, every discovered Skill passes full validation with the bundled documentation profile, referenced package files remain contained, and any untested runtime or client behavior is reported explicitly.
+   Completion: structural checks pass, every discovered Skill passes full validation with its local README, referenced package files remain contained, and any untested runtime or client behavior is reported explicitly.
 
 5. Package or release when requested.
 

@@ -81,6 +81,12 @@ Show the prompt, outputs, baseline, formal grades, and any previous iteration si
 
 Do not revise only from aggregate scores. Inspect traces for wasted work, ignored instructions, repeated improvised helpers, and hidden assumptions.
 
+## Independent forward-testing
+
+For a complex or high-risk skill, use an independent evaluator when delegation is available and authorized. Give it a realistic request, the candidate skill, and only the raw artifacts needed to perform the task. Do not reveal the intended answer, suspected defect, proposed fix, or prior conclusions unless the evaluation genuinely requires them.
+
+Run the evaluation in an isolated temporary workspace and keep its side effects within the user's authorization. Review the actual transcript and artifacts, then make only changes supported by the observed behavior. Ordinary creation and small edits do not need an independent agent pass.
+
 ## Trigger evaluation
 
 Create about 20 realistic queries:

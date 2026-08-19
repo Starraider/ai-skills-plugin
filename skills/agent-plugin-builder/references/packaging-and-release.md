@@ -7,7 +7,7 @@ Use this reference when producing a portable archive or preparing a versioned Ag
 Classify each source path before packaging:
 
 - **Portable runtime:** root `plugin.json`, immediate-child Skills and their resources, optional root `mcp.json`, and executables or data referenced by MCP configuration.
-- **Human documentation:** root README, licenses, notices, and attribution.
+- **Human documentation:** root README, every Skill's detailed README, licenses, notices, and attribution.
 - **Client extension:** only a documented reverse-domain extension directory declared by the owning client.
 - **Maintainer-only:** CI, tests, evals, caches, editor state, release helpers, and development reports.
 
@@ -31,7 +31,7 @@ python3 scripts/package_agent_plugin.py /path/to/plugin \
 The packager:
 
 1. validates the source plugin;
-2. validates every immediate-child Skill with the bundled documentation profile;
+2. validates every immediate-child Skill, including its detailed local README;
 3. builds a deterministic archive from an explicit allowlist;
 4. rejects symlinks and paths that escape the plugin root;
 5. extracts into a clean temporary directory; and

@@ -221,6 +221,12 @@ def validate_skills(root: Path, reporter: Reporter) -> None:
         if not skill_file.is_file() or not path_is_within(skill_file, root):
             reporter.error(location, "must resolve to a regular file inside plugin root")
             continue
+        readme = child / "README.md"
+        if not readme.is_file() or not path_is_within(readme, root):
+            reporter.error(
+                f"skills/{child.name}/README.md",
+                "every Skill must include a detailed local README.md",
+            )
         try:
             fields, error = parse_frontmatter(skill_file.read_text(encoding="utf-8"))
         except OSError as exc:

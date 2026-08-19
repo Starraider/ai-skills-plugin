@@ -6,11 +6,9 @@ A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing 
 
 | Skill | Purpose |
 | --- | --- |
-| `agent-plugin-builder` | Create, migrate, validate, package, and release Agent Plugins 1.0.0 |
-| `new-prompt` | Create and improve ready-to-use LLM prompts |
-| `new-skill` | Create, validate, evaluate, and package portable Agent Skills |
-| `skill-creator` | Create or update Codex Skills with scoped instructions and resources |
-| `writing-great-skills` | Reference guidance for predictable Skill authoring |
+| [`agent-plugin-builder`](skills/agent-plugin-builder/README.md) | Create, migrate, validate, package, and release Agent Plugins 1.0.0. |
+| [`new-prompt`](skills/new-prompt/README.md) | Create and improve ready-to-use LLM prompts. |
+| [`new-skill`](skills/new-skill/README.md) | Create, validate, evaluate, and package portable Agent Skills. |
 
 Compatible clients discover each immediate child of `skills/` that contains a valid `SKILL.md`. This package has no MCP servers, so it intentionally omits `mcp.json`.
 

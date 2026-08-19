@@ -31,7 +31,7 @@ theme-plugin/
 └── .github/workflows/             # maintainer-only
 ```
 
-Only create directories the package or its maintainers actually use. A bundled Skill normally relies on the root README; give it a local README only when it is independently consumed.
+Only create directories the package or its maintainers actually use. Every bundled Skill has a local detailed README. The root README holds only plugin-wide information and concise linked Skill summaries.
 
 ## Recommended standalone repository
 
@@ -53,7 +53,7 @@ standalone-skill/
 
 Use only the files the project needs. A single-skill repository may place the skill at the root if its target clients and installer support that layout, but `skills/<name>/` makes client packaging and multi-skill growth clearer.
 
-The repository README should identify the problem, trigger contexts, outputs, inputs, validation, supported clients, at least three example prompts, related skills, contributing process, security contact, and license. If the Skill directory has its own README, keep repository-level details at the root and runtime-adjacent usage beside the Skill.
+For a plugin, keep detailed purpose, triggers, outputs, inputs, examples, and Skill validation in each Skill README. The root README should contain only a concise linked Skill index plus plugin-wide installation, package validation, contributing, security, and license information.
 
 ## Licensing
 

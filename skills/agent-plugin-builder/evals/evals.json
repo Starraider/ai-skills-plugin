@@ -10,6 +10,7 @@
       "expectations": [
         "plugin.json uses the canonical Agent Plugins 1.0.0 schema and contains no inline component fields",
         "The Skill is located at skills/release-notes/SKILL.md and follows Agent Skills naming and description rules",
+        "The Skill has a detailed README.md, while the root README links to it with a concise summary",
         "mcp.json declares a stdio server whose command is ./bin/release-tools and whose cache path uses ${PLUGIN_DATA}",
         "The output separates command from args and contains no package-visible credentials",
         "The bundled validator passes on the produced package"

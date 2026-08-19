@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -152,6 +153,66 @@ def parse_clients(raw: str) -> Set[str]:
     return selected
 
 
+def parse_yaml_types(lines: Sequence[str], reporter: Reporter) -> object:
+    """Use PyYAML when available to enforce the specification's YAML type contract."""
+    try:
+        import yaml  # type: ignore[import-not-found]
+    except ImportError:
+        reporter.warn(
+            "PyYAML is unavailable; run skills-ref validate for complete YAML type checks"
+        )
+        return None
+
+    try:
+        data = yaml.safe_load("\n".join(lines))
+    except yaml.YAMLError as exc:
+        reporter.error(f"SKILL.md frontmatter is invalid YAML: {exc}")
+        return None
+    if not isinstance(data, dict):
+        reporter.error("SKILL.md frontmatter must be a YAML mapping")
+        return None
+    if not all(isinstance(key, str) for key in data):
+        reporter.error("SKILL.md frontmatter keys must be strings")
+    return data
+
+
+def check_portable_field_types(data: object, reporter: Reporter) -> None:
+    if not isinstance(data, dict):
+        return
+
+    for field in ("name", "description"):
+        if field in data and not isinstance(data[field], str):
+            reporter.error(f"frontmatter {field} must be a string")
+
+    for field in ("license", "compatibility"):
+        if field not in data:
+            continue
+        value = data[field]
+        if not isinstance(value, str) or not value.strip():
+            reporter.error(f"frontmatter {field} must be a non-empty string when provided")
+
+    if "metadata" in data:
+        metadata = data["metadata"]
+        if not isinstance(metadata, dict):
+            reporter.error("frontmatter metadata must be a string-to-string mapping")
+        elif not all(
+            isinstance(key, str) and isinstance(value, str)
+            for key, value in metadata.items()
+        ):
+            reporter.error("frontmatter metadata keys and values must all be strings")
+
+    if "allowed-tools" in data:
+        allowed_tools = data["allowed-tools"]
+        if (
+            not isinstance(allowed_tools, str)
+            or not allowed_tools.strip()
+            or "\n" in allowed_tools
+        ):
+            reporter.error(
+                "frontmatter allowed-tools must be a non-empty, space-separated string"
+            )
+
+
 def markdown_files(skill_dir: Path) -> Iterable[Path]:
     for path in skill_dir.rglob("*.md"):
         if "templates" not in path.relative_to(skill_dir).parts:
@@ -176,6 +237,12 @@ def check_links(skill_dir: Path, reporter: Reporter) -> None:
                 reporter.error(
                     f"broken relative link in {source.relative_to(skill_dir)}: {raw_target}"
                 )
+            if source == skill_dir / "SKILL.md":
+                relative = Path(target)
+                if len(relative.parts) > 2:
+                    reporter.warn(
+                        f"deep file reference from SKILL.md should be one level deep: {target}"
+                    )
     reporter.ok(f"checked {checked} relative Markdown links")
 
 
@@ -188,13 +255,10 @@ def section_body(text: str, heading: str) -> str:
     return match.group(1) if match else ""
 
 
-def check_readme(skill_dir: Path, reporter: Reporter, documentation_profile: str) -> None:
+def check_readme(skill_dir: Path, reporter: Reporter) -> None:
     readme = skill_dir / "README.md"
     if not readme.is_file():
-        if documentation_profile == "standalone":
-            reporter.error("README.md is required for a standalone Skill")
-        else:
-            reporter.ok("bundled Skill uses the owning Agent Plugin README")
+        reporter.error("README.md is required for every Skill")
         return
     text = readme.read_text(encoding="utf-8")
     headings = set(re.findall(r"^## (.+?)\s*$", text, flags=re.MULTILINE))
@@ -332,6 +396,9 @@ def validate(args: argparse.Namespace) -> int:
     if duplicates:
         reporter.error(f"duplicate frontmatter fields: {', '.join(sorted(set(duplicates)))}")
 
+    yaml_data = parse_yaml_types(frontmatter_lines, reporter)
+    check_portable_field_types(yaml_data, reporter)
+
     allowed_fields = set(PORTABLE_FIELDS)
     for client in selected_clients:
         allowed_fields.update(CLIENT_EXTENSION_FIELDS[client])
@@ -368,6 +435,11 @@ def validate(args: argparse.Namespace) -> int:
     if compatibility and len(compatibility) > 500:
         reporter.error(f"compatibility is {len(compatibility)} characters; maximum is 500")
 
+    if not body.strip():
+        reporter.error("SKILL.md must contain a non-empty Markdown instruction body")
+    else:
+        reporter.ok("SKILL.md contains a Markdown instruction body")
+
     if "globs" in fields:
         reporter.warn("Cursor accepts legacy 'globs', but new skills should use 'paths'")
     if "allowed-tools" in fields and {"opencode", "antigravity", "qoder"} & selected_clients:
@@ -390,11 +462,14 @@ def validate(args: argparse.Namespace) -> int:
     else:
         reporter.ok(f"SKILL.md is {line_count} lines")
 
-    word_count = len(re.findall(r"\b[\w'-]+\b", body))
-    if word_count > 1000:
-        reporter.warn(f"SKILL.md body is {word_count} words; inspect for progressive disclosure")
+    estimated_tokens = math.ceil(len(body) / 4)
+    if estimated_tokens > 5000:
+        reporter.warn(
+            f"SKILL.md body is approximately {estimated_tokens} tokens; "
+            "the specification recommends fewer than 5000"
+        )
     else:
-        reporter.ok(f"SKILL.md body is {word_count} words")
+        reporter.ok(f"SKILL.md body is approximately {estimated_tokens} tokens")
 
     for path in [skill_file, skill_dir / "README.md"]:
         if not path.is_file():
@@ -405,7 +480,7 @@ def validate(args: argparse.Namespace) -> int:
         if re.search(r"\bTODO\b", path_text):
             reporter.error(f"unresolved TODO marker in {path.name}")
 
-    check_readme(skill_dir, reporter, args.documentation_profile)
+    check_readme(skill_dir, reporter)
     check_references(skill_dir, skill_text, reporter)
     check_scripts(skill_dir, reporter)
     check_evals(skill_dir, name, reporter)
@@ -432,15 +507,6 @@ def build_parser() -> argparse.ArgumentParser:
         "--strict-portable",
         action="store_true",
         help="Reject client-specific SKILL.md frontmatter fields",
-    )
-    parser.add_argument(
-        "--documentation-profile",
-        choices=("standalone", "bundled"),
-        default="standalone",
-        help=(
-            "Require a Skill-local README for standalone Skills, or allow the owning "
-            "Agent Plugin README to document a bundled Skill"
-        ),
     )
     return parser
 

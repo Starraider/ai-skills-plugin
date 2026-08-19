@@ -55,7 +55,6 @@ Validate this authoring skill:
 ```bash
 skills/new-skill/scripts/validate-skill.sh \
   skills/agent-plugin-builder \
-  --clients claude,codex,cursor,antigravity,opencode,qoder \
   --strict-portable
 ```
 
@@ -73,7 +72,7 @@ python3 skills/agent-plugin-builder/scripts/package_agent_plugin.py \
   /path/to/plugin --output /tmp/plugin.zip
 ```
 
-The plugin validator checks Agent Plugins 1.0.0 package semantics and basic Agent Skill frontmatter. The packager composes it with full bundled-Skill validation and repeats those checks against a clean extracted copy. Test actual MCP startup and each client extension in its intended environment.
+The plugin validator checks Agent Plugins 1.0.0 package semantics, basic Agent Skill frontmatter, and the required local README for every Skill. The packager composes it with full Skill validation and repeats those checks against a clean extracted copy. Test actual MCP startup and each client extension in its intended environment.
 
 ## Related skills
 

@@ -10,6 +10,7 @@
       "expectations": [
         "The skill directory contains SKILL.md and README.md",
         "The SKILL.md name matches its directory and the description is at most 1024 characters",
+        "The output is checked against the current Agent Skills specification",
         "Client-specific compatibility is documented without putting incompatible fields in portable frontmatter",
         "The README contains at least three realistic example prompts"
       ]
@@ -24,6 +25,7 @@
         "Claude Code and Cursor use disable-model-invocation in their targeted configuration",
         "Codex uses agents/openai.yaml policy.allow_implicit_invocation",
         "OpenCode access is handled in opencode.json or an equivalent documented permission configuration",
+        "SKILL.md retains the specification-required non-empty description",
         "The solution does not claim that frontmatter is a cross-client security boundary"
       ]
     },

@@ -1,6 +1,6 @@
 ---
 name: new-skill
-description: Use when creating, consolidating, improving, validating, or packaging an agent skill for Claude Code, Codex, Cursor, Antigravity, OpenCode, or Qoder. Covers portable SKILL.md authoring, bundled and standalone documentation, progressive disclosure, scripts, templates, and evaluation.
+description: Use when creating, improving, validating, or packaging an Agent Skill. Covers standards-compliant SKILL.md authoring, bundled and standalone documentation, progressive disclosure, scripts, templates, and evaluation.
 ---
 
 # New Skill
@@ -9,17 +9,19 @@ Create predictable skills: the same sound process on every run, with outputs ada
 
 ## 1. Establish the contract
 
-Extract known requirements from the conversation and repository before asking questions. Resolve the outcome, trigger boundary, inputs, outputs, side effects, target clients, dependencies, and objective success checks.
+Read the mandatory [Agent Skills specification](references/specification.md) for every creation or material revision. The current specification is authoritative; client conventions and repository preferences may extend it but never contradict it.
+
+Extract known requirements from the conversation, real task evidence, and repository before asking questions. Resolve the outcome, trigger boundary, near misses, inputs, outputs, side effects, target clients, dependencies, and objective success checks. Preserve the user's chosen tools, scope, and authorization boundaries.
 
 For a revision, preserve the existing name unless the user requests a migration. Read every applicable repository instruction file before editing.
 
-Completion: a testable contract exists, and only materially ambiguous choices remain open.
+Completion: a testable contract exists, the normative specification has been checked, and only materially ambiguous choices remain open.
 
 ## 2. Select the compatibility profile
 
-Read [client compatibility](references/client-compatibility.md) whenever a target client is named. Default to the portable Agent Skills core: `name` and `description`, Markdown instructions, and optional `license`, `compatibility`, `metadata`, `scripts/`, `references/`, and `assets/`.
+Read [client compatibility](references/client-compatibility.md) whenever a target client is named. Default to the portable Agent Skills core and add client extensions only when they provide required behavior.
 
-Add client extensions only when they provide required behavior. Keep client configuration outside `SKILL.md` when that client expects it elsewhere.
+Keep automatic discovery unless the user explicitly requests manual-only invocation or a target environment requires another policy. Invocation policy does not authorize side effects: require permission at the actual mutation boundary. Keep client configuration outside `SKILL.md` when that client expects it elsewhere.
 
 Completion: every selected client has a discovery path, valid metadata, and no contradictory extension.
 
@@ -27,7 +29,7 @@ Completion: every selected client has a discovery path, valid metadata, and no c
 
 Read the [authoring guide](references/authoring-guide.md). Choose one precise capability boundary. Put common ordered steps in `SKILL.md`; give each consequential step a checkable completion criterion. Move branch-specific details behind direct context pointers.
 
-Use `scripts/` for repeated deterministic work, `references/` for on-demand knowledge, and `templates/` for files copied into outputs. Give a standalone Skill its own `README.md`; document a bundled Skill in the owning Agent Plugin's root README unless it needs an independent human surface. Do not create empty support directories.
+Assume the agent is capable: retain only non-obvious knowledge, real constraints, useful defaults, and instructions that change behavior. Match specificity to fragility. Use `scripts/` for repeated deterministic work, `references/` for on-demand knowledge, and `templates/` or `assets/` for files copied into outputs. Give every Skill its own detailed `README.md`. An owning Agent Plugin README retains plugin-wide guidance and a concise linked summary of each Skill; it does not duplicate detailed Skill documentation. Do not create empty support directories.
 
 Completion: every file has one responsibility and every support file is directly discoverable from `SKILL.md`.
 
@@ -42,10 +44,11 @@ Completion: the skill can be followed from a clean session without hidden assump
 Run:
 
 ```bash
-scripts/validate-skill.sh path/to/skill --clients claude,codex,cursor,antigravity,opencode,qoder
+scripts/validate-skill.sh path/to/skill --strict-portable
+skills-ref validate path/to/skill
 ```
 
-For a Skill documented by its containing Agent Plugin, add `--documentation-profile bundled`. Then follow [evaluation and iteration](references/evaluation.md). Test representative, edge-case, and near-miss prompts. Compare against a no-skill or previous-version baseline when the environment supports isolated runs.
+Use the current `skills-ref` validator when available, then follow [evaluation and iteration](references/evaluation.md). Test representative, edge-case, and near-miss prompts. Compare against a no-skill or previous-version baseline when the environment supports isolated runs.
 
 Completion: structural checks pass, links resolve, target clients can discover the skill, and evidence supports the claimed improvement.
 

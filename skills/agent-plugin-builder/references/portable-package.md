@@ -12,6 +12,7 @@ my-plugin/
 ├── skills/
 │   └── summarize/
 │       ├── SKILL.md
+│       ├── README.md
 │       ├── scripts/
 │       ├── references/
 │       └── assets/
@@ -63,6 +64,7 @@ Each `skills/<name>/SKILL.md` follows the [Agent Skills specification](https://a
 
 - The frontmatter `name` matches its parent directory, is 1–64 characters, uses lowercase letters, digits, and single hyphens, and does not begin or end with a hyphen.
 - `description` is non-empty, no more than 1024 characters, and explains what the Skill does and when it applies.
+- Every Skill has a detailed local `README.md`; the root plugin README provides only a concise linked index and plugin-wide information.
 - Skill-owned scripts, references, assets, and other resources remain beneath the Skill directory.
 - An invalid Skill is skipped independently; it does not invalidate other Skills or MCP servers.
 

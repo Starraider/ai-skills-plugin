@@ -1,22 +1,12 @@
 # Client compatibility
 
-Last verified: 2026-07-03.
+Last verified: 2026-08-19.
 
 Use this reference when selecting install paths, frontmatter, invocation behavior, or client packaging. Client behavior changes; re-check the linked primary documentation before publishing compatibility claims.
 
 ## Portable core
 
-The safest common format is the [Agent Skills specification](https://agentskills.io/specification):
-
-```text
-skill-name/
-├── SKILL.md
-├── README.md
-├── references/   # optional on-demand documentation
-├── scripts/      # optional executable helpers
-├── templates/    # optional bootstrap files
-└── assets/       # optional static resources
-```
+Always apply [Agent Skills specification compliance](specification.md) first. Client sections below describe discovery paths and documented extensions; none may weaken the portable core.
 
 Use this baseline in `SKILL.md`:
 
@@ -27,14 +17,7 @@ description: Use when the user needs a clearly bounded capability and name the r
 ---
 ```
 
-Portable constraints:
-
-- `name` is required, 1–64 characters, lowercase ASCII letters or digits separated by single hyphens, and matches the directory.
-- `description` is required, non-empty, no more than 1024 characters, and explains both capability and trigger boundary.
-- `license`, `compatibility` (maximum 500 characters), and string-to-string `metadata` are optional.
-- `allowed-tools` is experimental in the open specification and is not interpreted consistently. Avoid it in a cross-client skill.
-- Keep `SKILL.md` under 500 lines and directly link every support file it may need.
-- `README.md` is human documentation. Clients generally do not load it as runtime skill instructions, but every created skill in this workflow includes one.
+For cross-client output, avoid experimental `allowed-tools`, keep client policy in documented companion configuration, and include a detailed README in every Skill directory.
 
 ## Compatibility matrix
 
