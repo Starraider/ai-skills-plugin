@@ -1,0 +1,42 @@
+{
+  "skill_name": "new-hook",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "Create a project-local Codex hook that blocks only Bash commands containing 'rm -rf' outside the repository tmp directory. Include a safe test and a blocked test.",
+      "expected_output": "A .codex/hooks.json registration and a narrowly scoped handler that reads Codex JSON input, blocks only the stated condition with a documented response shape, and provides trust plus two-path verification steps.",
+      "files": [],
+      "expectations": [
+        "The output chooses Codex hooks rather than a generic configuration.",
+        "The matcher is narrow and the handler does not unconditionally deny Bash.",
+        "The handler has no secrets or unbounded network work.",
+        "Verification covers one allowed command and one blocked command."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "In Zed, automatically copy a developer's .env into every new linked worktree.",
+      "expected_output": "A Zed tasks.json create_worktree task, guarded path/sensitivity guidance, and a disposable-worktree smoke test.",
+      "files": [],
+      "expectations": [
+        "The output uses Zed's create_worktree task hook and does not claim a general agent lifecycle event.",
+        "It calls out the risk of copying a secret file and requires source/destination validation.",
+        "It tests on a disposable worktree."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "near-miss",
+      "prompt": "Make a ChatGPT hook that sends each completed response to Slack.",
+      "expected_output": "A concise explanation that ChatGPT has no documented comparable local lifecycle hook, with an alternative integration/workflow design and authorization boundary.",
+      "files": [],
+      "expectations": [
+        "The output does not invent a ChatGPT hooks.json file or browser automation.",
+        "It distinguishes a Skill from an app, Plugin, MCP integration, or approved automation.",
+        "It does not connect Slack or enable external writes without user approval."
+      ]
+    }
+  ]
+}
