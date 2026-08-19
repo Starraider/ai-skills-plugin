@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-skills-plugin",
-  "description": "Portable Agent Skills for prompt design, IDE-native agents, hooks, and workflow creation, skill authoring, and Agent Plugin creation.",
+  "description": "Portable Agent Skills for prompt design, IDE-native agents, hooks, slash commands, and workflow creation, skill authoring, and Agent Plugin creation.",
   "keywords": [
     "agent-skills",
     "agent-plugins",
@@ -9,6 +9,7 @@
     "skill-authoring",
     "agent-creation",
     "hooks",
+    "slash-commands",
     "automation",
     "workflows"
   ]

@@ -1,0 +1,38 @@
+{
+  "skill_name": "new-slash-command",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create /review-api in OpenCode for this project. It should review the current diff for API breaking changes, accept an optional focus area, and never edit files.",
+      "expected_output": "A project-scoped OpenCode Markdown command plus invocation and a read-only smoke test.",
+      "files": [],
+      "expectations": [
+        "Uses .opencode/commands/review-api.md and OpenCode-supported frontmatter.",
+        "Uses $ARGUMENTS only if an optional focus area is part of the command interface.",
+        "Does not claim that the command grants permissions or edit files."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need /deploy-preview in Codex. Create it and make sure it deploys automatically after the tests pass.",
+      "expected_output": "An explicit Codex Skill recommendation and artifact, or a clear explanation that literal custom slash commands are unavailable.",
+      "files": [],
+      "expectations": [
+        "States that Codex uses $skill-name rather than a user-created /name command.",
+        "Uses an explicit Skill and preserves an approval gate before deployment.",
+        "Includes /skills or $skill-name discovery guidance."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Set up a ChatGPT slash command that posts a weekly revenue summary to Slack every Monday without asking anyone.",
+      "expected_output": "A safe alternative recommendation rather than a fabricated ChatGPT slash-command artifact.",
+      "files": [],
+      "expectations": [
+        "States that ChatGPT uses @skill-name for Skills rather than custom /name commands.",
+        "Rejects unattended external posting as a simple command and recommends an appropriate workflow or automation with authorization.",
+        "Does not embed Slack credentials or bypass approvals."
+      ]
+    }
+  ]
+}
