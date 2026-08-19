@@ -1,12 +1,13 @@
 # AI Skills Plugin
 
-A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing reusable Agent Skills for prompt design, IDE-native agent, hook, and slash-command creation, Skill authoring, and Agent Plugin creation.
+A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing reusable Agent Skills for AI-harness diagnosis, prompt design, IDE-native agent, hook, and slash-command creation, Skill authoring, and Agent Plugin creation.
 
 ## Included Skills
 
 | Skill | Purpose |
 | --- | --- |
 | [`agent-plugin-builder`](skills/agent-plugin-builder/README.md) | Create, migrate, validate, package, and release Agent Plugins 1.0.0. |
+| [`improve-my-ai-harness`](skills/improve-my-ai-harness/README.md) | Diagnose an AI-IDE problem, select the smallest suitable harness mechanism or combination, and produce a builder-routed implementation prompt. |
 | [`new-agent`](skills/new-agent/README.md) | Create least-privilege, IDE-native agents for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-agents-md`](skills/new-agents-md/README.md) | Create concise, target-aware `AGENTS.md` repository instructions for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-hook`](skills/new-hook/README.md) | Decide whether an event hook is appropriate and create a target-native hook or supported alternative. |
@@ -20,7 +21,7 @@ Compatible clients discover each immediate child of `skills/` that contains a va
 ## Install in supported IDEs and agents
 
 This repository is a portable Agent Plugins 1.0.0 package. Its portable payload is
-the root `plugin.json` plus the eight directories directly below `skills/`; each
+the root `plugin.json` plus the nine directories directly below `skills/`; each
 of those directories contains the required `SKILL.md` and any supporting files.
 Keep an entire skill directory together when installing it—do not copy only its
 `SKILL.md`, because some skills use scripts, templates, and references.
@@ -43,7 +44,7 @@ export PLUGIN_DIR="$PWD"
 ```
 
 The following command is the manual-install pattern used throughout this guide.
-It copies all eight skill directories and preserves their bundled resources:
+It copies all nine skill directories and preserves their bundled resources:
 
 ```bash
 mkdir -p <skills-root>
@@ -114,8 +115,8 @@ syntax in [Build skills](https://developers.openai.com/codex/skills).
 2. Start Codex from that project (or reopen the project in the Codex IDE
    extension). Codex searches `.agents/skills` from the current directory up to
    the repository root.
-3. Run `/skills` to confirm the eight skills are visible, then invoke one with
-   `$new-agent`, `$new-agents-md`, `$new-hook`, `$new-prompt`, `$new-skill`, `$new-slash-command`, `$new-workflow`, or `$agent-plugin-builder`. Matching requests
+3. Run `/skills` to confirm the nine skills are visible, then invoke one with
+   `$improve-my-ai-harness`, `$new-agent`, `$new-agents-md`, `$new-hook`, `$new-prompt`, `$new-skill`, `$new-slash-command`, `$new-workflow`, or `$agent-plugin-builder`. Matching requests
    can also activate a skill automatically.
 4. Codex normally detects skill changes automatically. Restart Codex only when
    a newly added skill fails to appear. If an administrator disables a local
@@ -131,7 +132,7 @@ it today. See [Plugins in ChatGPT and Codex](https://help.openai.com/en/articles
 ### ChatGPT
 
 ChatGPT installs standalone skills, not local filesystem plugin directories.
-Upload the eight skill directories separately; each must include its required
+Upload the nine skill directories separately; each must include its required
 `SKILL.md` and all of its supporting files. The root `plugin.json` is for
 portable package distribution and is not a replacement for a skill upload.
 See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
@@ -143,6 +144,7 @@ See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
    (
      cd "$PLUGIN_DIR/skills"
      zip -r /tmp/agent-plugin-builder.zip agent-plugin-builder
+     zip -r /tmp/improve-my-ai-harness.zip improve-my-ai-harness
      zip -r /tmp/new-agent.zip new-agent
      zip -r /tmp/new-agents-md.zip new-agents-md
      zip -r /tmp/new-hook.zip new-hook
@@ -171,7 +173,7 @@ is the applicable route.
 
 Zed consumes Agent Skills rather than portable plugin bundles. The required
 unit is `SKILL.md` in one direct child directory of the skills root; copy all
-eight complete directories from this repository. Zed’s official [Skills
+nine complete directories from this repository. Zed’s official [Skills
 documentation](https://zed.dev/docs/ai/skills) covers the paths, Skills Manager,
 and trust model.
 
@@ -257,7 +259,7 @@ to install its skills. Each complete skill directory, including `SKILL.md`, is
 required. Refer to [Qoder Skills](https://docs.qoder.com/extensions/skills) and
 [Qoder Plugins](https://docs.qoder.com/extensions/plugins).
 
-1. Copy the eight skill directories to a user or project scope:
+1. Copy the nine skill directories to a user or project scope:
 
    ```text
    ~/.qoder/skills/<skill-name>/                 # all Qoder projects for this user
@@ -272,7 +274,7 @@ required. Refer to [Qoder Skills](https://docs.qoder.com/extensions/skills) and
 2. Restart Qoder IDE, then type `/` in Chat or Quest to verify the skills are
    loaded. A project-level skill with the same name takes precedence over a
    user-level skill.
-3. Invoke a skill with `/new-agent`, `/new-agents-md`, `/new-hook`, `/new-prompt`, `/new-skill`, `/new-slash-command`, `/new-workflow`,
+3. Invoke a skill with `/improve-my-ai-harness`, `/new-agent`, `/new-agents-md`, `/new-hook`, `/new-prompt`, `/new-skill`, `/new-slash-command`, `/new-workflow`,
    or `/agent-plugin-builder`, or let Qoder match it automatically from its
    description.
 

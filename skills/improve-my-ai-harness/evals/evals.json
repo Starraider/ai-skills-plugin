@@ -1,0 +1,57 @@
+{
+  "skill_name": "improve-my-ai-harness",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "My AI coding assistant keeps making the same kinds of mistakes. Should I add an agent, a skill, a hook, or something else? Help me improve the setup.",
+      "expected_output": "The first round of an evidence-seeking interview, not a premature mechanism recommendation.",
+      "files": [],
+      "expectations": [
+        "The response asks for a concrete failure example and desired observable behavior",
+        "It asks no more than three related questions in the turn",
+        "It does not select or implement a mechanism while material facts remain unresolved",
+        "It does not imply that a prompt or agent grants tools or permissions"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "We use Codex in one shared repository. Every agent must know our verified migration commands and generated-file boundaries, while developers also need an explicit, judgment-heavy pre-PR migration review that reads our schema and tests but never edits files. This happens several times a week. Success means all six checklist expectations appear in the review and agents stop suggesting edits to generated snapshots. Recommend the setup and give me the implementation prompt.",
+      "expected_output": "A layered AGENTS.md plus Agent Skill recommendation and a self-contained prompt that routes implementation to new-agents-md and new-skill without duplicating their responsibilities.",
+      "files": [],
+      "expectations": [
+        "Stable repository commands and boundaries are assigned to AGENTS.md",
+        "The judgment-heavy repeatable review is assigned to an Agent Skill",
+        "The implementation prompt names new-agents-md before new-skill and gives each a distinct deliverable",
+        "The recommendation remains read-only and includes discovery plus representative behavioral tests",
+        "A separate agent, hook, workflow, and Agent Plugin are rejected as unnecessary"
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "edge-case",
+      "prompt": "In Codex, before any shell command runs, block only commands that contain our exact production database hostname. The check must be deterministic, local, under 100 ms, and allow every other command. This is project-scoped and must not call the network. We will test one allowed and one blocked command. Decide what to build and hand off an implementation prompt.",
+      "expected_output": "A project-scoped hook recommendation with a prompt routed to new-hook and a requirement to verify current Codex event support before implementing.",
+      "files": [],
+      "expectations": [
+        "The deterministic documented-event requirement is assigned to a hook rather than a Skill or agent",
+        "The prompt names new-hook and no irrelevant builder skills",
+        "The exact matcher, latency, no-network constraint, scope, allowed case, and blocked case appear in the handoff",
+        "The response treats the hook as defense in depth and does not weaken Codex permissions"
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "near-miss",
+      "prompt": "Create a portable Agent Skill named api-contract-review from this completed specification and add it to this plugin.",
+      "expected_output": "A direct route to new-skill because the mechanism is already chosen, without restarting the harness-diagnosis interview.",
+      "files": [],
+      "expectations": [
+        "The response identifies new-skill as the applicable builder",
+        "It does not interview the user about choosing among harness mechanisms",
+        "It does not substitute an agent, workflow, hook, or prompt"
+      ]
+    }
+  ]
+}
