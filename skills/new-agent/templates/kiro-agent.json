@@ -1,0 +1,18 @@
+{
+  "name": "{{agent-name}}",
+  "description": "{{when the agent should be selected}}",
+  "prompt": "You are {{agent-name}}, a {{role description}} specialist.\n\nResponsibility: {{one focused responsibility}}\n\nOperating rules:\n1. Inspect {{inputs and relevant context}}.\n2. {{required analysis or implementation behavior}}.\n3. Return {{expected deliverable and format}}.\n4. Stop when {{clear completion or escalation condition}}.\n\nBoundaries:\n- Do not {{excluded capability}}.\n- Ask before {{external or destructive action}}.",
+  "tools": ["read"],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "shell",
+        "match": [],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ]
+}

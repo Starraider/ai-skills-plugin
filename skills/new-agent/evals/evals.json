@@ -38,6 +38,72 @@
         "It does not choose an IDE, tool set, or agent format by default.",
         "It does not create a generic cross-client definition."
       ]
+    },
+    {
+      "id": 4,
+      "kind": "representative",
+      "prompt": "Create a Cursor Custom Mode called 'Refactor Expert'. It should have a system prompt focused on safe, incremental refactoring. It may read and edit files but must not run terminal commands or access the web.",
+      "expected_output": "A Custom Mode specification with name, system instructions, tool permissions (edit enabled, terminal disabled, web search disabled), and verification steps to select the mode in the Chat sidebar.",
+      "files": [],
+      "expectations": [
+        "The output produces a Custom Mode specification, not a .mdc rule file.",
+        "Tool permissions explicitly disable terminal and web search.",
+        "The response explains that Custom Modes are UI-configured and not version-controlled by default.",
+        "Verification includes selecting the mode from the Chat sidebar dropdown."
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "representative",
+      "prompt": "Add a GitHub Copilot agent called 'docs-writer' in our repository. It should read source files and generate documentation. No file edits.",
+      "expected_output": "A .github/agents/docs-writer.agent.md file with YAML frontmatter (name, description, tools) and a system prompt scoped to documentation generation; no write tools enabled. Discovery steps via the Copilot agent picker.",
+      "files": [],
+      "expectations": [
+        "The output is a .agent.md file at .github/agents/docs-writer.agent.md.",
+        "Frontmatter includes name and description; tools list does not include write or edit capabilities.",
+        "The skill distinguishes .agent.md from copilot-instructions.md.",
+        "Verification includes opening the Copilot Chat agent picker."
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "edge-case",
+      "prompt": "Create a Windsurf agent called 'api-specialist' that focuses on REST API design and never suggests GraphQL.",
+      "expected_output": "A .windsurf/rules/api-specialist.md file with XML-style role, operating rules, and boundaries sections; Always On activation; and an explanation that Windsurf uses rule files rather than discrete agent files.",
+      "files": [],
+      "expectations": [
+        "The output explains that Windsurf does not have a discrete named-agent file format.",
+        "The rule file uses XML-style tags and is placed in .windsurf/rules/.",
+        "The response distinguishes the rule file from .windsurfrules and global_rules.md.",
+        "Verification includes reloading the workspace and checking Settings → Workspace AI Rules."
+      ]
+    },
+    {
+      "id": 7,
+      "kind": "representative",
+      "prompt": "Create a Kiro project agent called 'test-runner' that may read files and run npm test commands. It must not edit source files.",
+      "expected_output": "A .kiro/agents/test-runner.json with tools restricted to read, permissions allowing only 'npm test*' shell commands, and a system prompt scoped to running tests and reporting results.",
+      "files": [],
+      "expectations": [
+        "The output is a .kiro/agents/test-runner.json at project scope.",
+        "tools contains read; write is absent.",
+        "permissions.rules restricts shell to 'npm test*' commands.",
+        "Verification includes selecting the agent from the Kiro agent picker."
+      ]
+    },
+    {
+      "id": 8,
+      "kind": "edge-case",
+      "prompt": "Use Google Agents CLI to create an agent called 'invoice-processor' that reads invoices from GCS and writes summaries to BigQuery. Deploy it to Cloud Run.",
+      "expected_output": "A design specification (DESIGN_SPEC.md) describing the agent's responsibility, ADK model, tools, and deployment target; the agents-cli create and deploy commands; and an explicit confirmation request before triggering cloud deployment.",
+      "files": [],
+      "expectations": [
+        "The output produces a design specification, not a standalone Markdown or rules file.",
+        "The response explains that the actual agent logic requires a Python agent.py implementation.",
+        "It lists agents-cli create, agents-cli eval, and agents-cli deploy commands.",
+        "It asks for explicit user confirmation before triggering agents-cli deploy.",
+        "It notes that Cloud Run deployment requires a Google Cloud project with Agent Platform and Cloud Run APIs enabled."
+      ]
     }
   ]
 }

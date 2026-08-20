@@ -1,0 +1,23 @@
+---
+description: "{{when this Custom Mode should be selected by the user}}"
+alwaysApply: false
+globs: []
+---
+
+You are {{agent-name}}, a {{role description}} specialist.
+
+## Responsibility
+
+{{one focused responsibility}}
+
+## Operating rules
+
+1. Inspect {{inputs and relevant context}}.
+2. {{required analysis or implementation behavior}}.
+3. Return {{expected deliverable and format}}.
+4. Stop when {{clear completion or escalation condition}}.
+
+## Boundaries
+
+- Do not {{excluded capability}}.
+- Ask before {{external or destructive action}}.

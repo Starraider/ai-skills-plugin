@@ -1,6 +1,6 @@
 ---
 name: new-agent
-description: Use when the user wants to create a specialized agent for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Require the target product and the agent's specific capabilities, then create the smallest supported agent definition and give product-appropriate verification steps. Do not treat skills, rules, or generic prompts as agents unless the selected product documents that model.
+description: Use when the user wants to create a specialized agent for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI. Require the target product and the agent's specific capabilities, then create the smallest supported agent definition and give product-appropriate verification steps. Do not treat skills, rules, or generic prompts as agents unless the selected product documents that model.
 license: CC-BY-4.0
 ---
 
@@ -8,7 +8,7 @@ license: CC-BY-4.0
 
 ## Outcome
 
-Create a clearly scoped, least-privilege agent for exactly one requested target: Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Produce the native configuration or a ready-to-paste builder specification, plus discovery and smoke-test instructions. Do not create, publish, or enable a remote ChatGPT agent without the user's explicit approval.
+Create a clearly scoped, least-privilege agent for exactly one requested target: Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI. Produce the native configuration or a ready-to-paste builder specification, plus discovery and smoke-test instructions. Do not create, publish, or enable a remote ChatGPT agent or a Google Agents CLI cloud deployment without the user's explicit approval.
 
 ## Workflow
 
@@ -16,7 +16,7 @@ Create a clearly scoped, least-privilege agent for exactly one requested target:
 
    Require both of the following. If either is missing, ask one concise clarification question rather than choosing on the user's behalf:
 
-   - **Target IDE/product:** Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. If the user names a product with multiple agent surfaces, identify the requested one.
+   - **Target IDE/product:** Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI. If the user names a product with multiple agent surfaces, identify the requested one.
    - **Specific capabilities:** the agent's single responsibility, expected inputs and deliverable, tools or integrations it needs, and whether it may edit files, run commands, or make external writes.
 
    Also resolve a name, project versus personal scope, model preference if material, and whether the agent is a main agent, profile, subagent, or external command. Explain any unsupported capability or missing account permission before generating files.
@@ -34,6 +34,11 @@ Create a clearly scoped, least-privilege agent for exactly one requested target:
    - **OpenCode:** create `.opencode/agents/<name>.md` for project scope or `~/.config/opencode/agents/<name>.md` for user scope. Use the OpenCode template and explicit permissions.
    - **Qoder:** create `.qoder/agents/<name>.md` for project scope or `~/.qoder/agents/<name>.md` for user scope. Use the Qoder template; include only tools, skills, and MCP servers the user requires.
    - **Orca:** create an Orca custom CLI-agent launch specification: name, verified binary or command, arguments, and optional safe startup hook. Orca registers a CLI agent in its Settings UI; it does not define the agent's internal behavior, so create the underlying CLI agent configuration first if one is needed.
+   - **Cursor:** distinguish a Custom Mode (persona with tool permissions, UI-configured) from a project rule (`.cursor/rules/<name>.mdc`, version-controlled). Generate a Custom Mode specification for a persona or role request; generate a `.mdc` file for a project-knowledge request. Explain that Custom Modes are not version-controlled by default. Use the Cursor mode template.
+   - **GitHub Copilot / VS Code:** create `.github/agents/<name>.agent.md` at repository scope, or the equivalent user-profile path for cross-workspace use. Distinguish the `.agent.md` agent from the always-on `copilot-instructions.md` and from path-scoped `.instructions.md` files; do not substitute them. Offer a Copilot Extension brief only when the user explicitly requires custom runtime behavior beyond what `.agent.md` supports. Use the Copilot agent template.
+   - **Windsurf:** explain that Windsurf does not have a discrete named-agent file format. The closest supported equivalent is a named rule file inside `.windsurf/rules/<name>.md` with Always On activation, using XML-style tags to group role, operating rules, and boundaries. Distinguish project-level (`.windsurfrules` or `.windsurf/rules/`), global (`global_rules.md`), and Cascade Memories. Alert the user to review Memories when updating rules. Use the Windsurf rules template.
+   - **Kiro:** create `.kiro/agents/<name>.json` (or `.md`) for project scope or `~/.kiro/agents/<name>.json` for user scope. Distinguish custom agents from steering files (`.kiro/steering/`) and hooks (`.kiro/hooks/`). Start with `tools: ["read"]` only; add write or shell only on request. Include steering files via `resources` rather than embedding their content. Use the Kiro agent template.
+   - **Google Agents CLI:** distinguish an ADK agent project (Python code in `agent.py` scaffolded by `agents-cli create`) from the agents-cli skills injected into a coding assistant. Produce a design specification using the Google Agents CLI spec template, then scaffold the project. Do not claim a Markdown spec alone is the agent. Ask before triggering `agents-cli deploy` or publishing to the Gemini Enterprise Agent Registry.
 
    Completion: exactly one native representation is selected, and the output does not claim portability across IDEs.
 
@@ -73,3 +78,8 @@ Create a clearly scoped, least-privilege agent for exactly one requested target:
 - [OpenCode Markdown agent template](templates/opencode-agent.md)
 - [Qoder Markdown agent template](templates/qoder-agent.md)
 - [Zed settings templates](templates/zed-agent-settings.jsonc)
+- [Cursor Custom Mode / rule template](templates/cursor-mode.mdc)
+- [GitHub Copilot agent template](templates/copilot-agent.md)
+- [Windsurf rules template](templates/windsurf-rules.md)
+- [Kiro agent JSON template](templates/kiro-agent.json)
+- [Google Agents CLI spec template](templates/google-agents-cli-spec.md)
