@@ -58,6 +58,8 @@ The target behavior and writing guidance were checked on 2026-08-20 using the pr
 
 ## Related skills
 
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) when it is unclear whether the behavior belongs in persistent repository guidance.
+- [`new-prompt`](../new-prompt/README.md) for one-off or user-invoked instructions rather than always-on project context.
 - [`new-agent`](../new-agent/README.md) for a specialized product-native agent.
 - [`new-skill`](../new-skill/README.md) for a reusable Agent Skill instead of always-on repository guidance.
 

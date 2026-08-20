@@ -72,6 +72,8 @@ Create a clearly scoped, least-privilege agent for exactly one requested target:
 
 ## Resources
 
+- If it is unclear whether the capability needs a specialist agent, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before creating a definition.
+- For reusable instructions without a dedicated tool boundary, use [`new-skill`](../new-skill/README.md); for repository-wide guidance, use [`new-agents-md`](../new-agents-md/README.md).
 - [Target formats, validation, and source research](references/target-formats.md)
 - [Antigravity Markdown agent template](templates/antigravity-agent.md)
 - [Codex TOML agent template](templates/codex-agent.toml)

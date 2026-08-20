@@ -61,6 +61,8 @@ Create a concise, factual `AGENTS.md` that gives the selected coding-agent surfa
 
 ## Resources
 
+- If it is unclear whether the need is persistent repository guidance, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before creating a file.
+- For a one-off or user-invoked instruction, use [`new-prompt`](../new-prompt/README.md); for reusable context-dependent procedures, use [`new-skill`](../new-skill/README.md).
 - [Target support, locations, precedence, and discovery checks](references/target-support.md)
 - [Evidence-based content and writing guidance](references/authoring-guidance.md)
 - [Portable AGENTS.md template](templates/AGENTS.md)

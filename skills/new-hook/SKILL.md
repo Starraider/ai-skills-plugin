@@ -29,10 +29,10 @@ Create one narrow, deterministic, and testable hook for a selected product, or e
 
    Prefer another mechanism when any condition fails:
 
-   - **Skill or instruction:** reusable reasoning, authoring guidance, or a workflow that needs context and judgment.
+   - **Skill or instruction:** reusable reasoning, authoring guidance, or a workflow that needs context and judgment; use [`new-skill`](../new-skill/README.md), [`new-agents-md`](../new-agents-md/README.md), or [`new-workflow`](../new-workflow/README.md) as appropriate.
    - **Permission policy:** a standing allow/ask/deny rule that does not need custom inspection.
    - **MCP server, app, or plugin:** a new capability or a maintained integration rather than an event reaction.
-   - **Task, worktree setup, CI, or scheduler:** a build/deploy/check that is tied to a worktree, commit, time, or repository event instead of an agent lifecycle event.
+   - **Task, worktree setup, CI, or scheduler:** a build/deploy/check that is tied to a worktree, commit, time, or repository event instead of an agent lifecycle event; use [`new-workflow`](../new-workflow/README.md) for a target-native repeatable procedure.
    - **ChatGPT:** do not invent a local lifecycle hook. Use a Skill for repeatable behavior, a Plugin/App/MCP integration for tools, or an approved scheduled/Workspace Agent workflow when that is the actual need.
    - **Windsurf:** the agent (Cascade) does not expose a general lifecycle hook API. Use `.windsurfrules`, a `.windsurf/workflows/` file, or MCP for integration needs. A limited command hook (`PreToolUse`) exists only for blocking shell-level tool calls; confirm the target surface before implementing.
 
@@ -83,4 +83,5 @@ Create one narrow, deterministic, and testable hook for a selected product, or e
 
 ## Resources
 
+- If the event contract does not make the right mechanism clear, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before implementing an alternative.
 - [Target hook formats, decision limits, validation, and primary-source links](references/target-hook-formats.md)

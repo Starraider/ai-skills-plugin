@@ -106,7 +106,8 @@ The plugin validator checks Agent Plugins 1.0.0 package semantics, basic Agent S
 
 ## Related skills
 
-- `new-skill` is useful when a plugin's Agent Skills need deeper authoring, cross-client metadata, or evaluation work.
+- [`new-skill`](../new-skill/README.md) is useful when a plugin's Agent Skills need deeper authoring, cross-client metadata, or evaluation work.
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) selects the smallest harness architecture when the package contents are not yet decided.
 - Client-native plugin creators remain appropriate for capabilities outside Agent Plugins 1.0.0, provided their output does not masquerade as the portable core.
 
 ## License

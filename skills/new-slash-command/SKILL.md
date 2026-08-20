@@ -24,13 +24,13 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
 
    Use a slash command only when a user explicitly starts a compact, repeatable prompt or short procedure with a stable purpose, useful arguments, and a reviewable outcome. Prefer the smallest sufficient alternative when that test fails:
 
-   - **One-off, exploratory, or still-changing work:** use a normal prompt or plan.
-   - **Reusable instructions, domain knowledge, supporting scripts, or a context-dependent procedure:** use an Agent Skill. Make it explicit-only where the target documents that behavior.
-   - **Persistent behavior or coding standards:** use a rule/instructions file.
-   - **A long-lived specialist with its own tools, permissions, or context:** use an agent.
-   - **Event-driven behavior:** use a hook, permission policy, CI, or automation—not a command.
-   - **Scheduled, API-triggered, or unattended work:** use a task, automation, CI, or target-native orchestration.
-   - **Multiple agents with delegation, shared state, or approvals:** use a workflow/orchestration feature.
+   - **One-off, exploratory, or still-changing work:** use a normal prompt or plan; use [`new-prompt`](../new-prompt/README.md) when a ready-to-use prompt is needed.
+   - **Reusable instructions, domain knowledge, supporting scripts, or a context-dependent procedure:** use [`new-skill`](../new-skill/README.md). Make it explicit-only where the target documents that behavior.
+   - **Persistent behavior or coding standards:** use [`new-agents-md`](../new-agents-md/README.md) or the target's native rule/instructions file.
+   - **A long-lived specialist with its own tools, permissions, or context:** use [`new-agent`](../new-agent/README.md).
+   - **Event-driven behavior:** use [`new-hook`](../new-hook/README.md), a permission policy, CI, or automation—not a command.
+   - **Scheduled, API-triggered, or unattended work:** use a task, automation, CI, or target-native orchestration; use [`new-workflow`](../new-workflow/README.md) for a documented reusable procedure.
+   - **Multiple agents with delegation, shared state, or approvals:** use [`new-workflow`](../new-workflow/README.md) or a target-native orchestration feature.
 
    A command does not grant permissions or make side effects safe. For deploy, publish, delete, message, payment, or credential-affecting work, default to drafting or asking for approval immediately before the irreversible action.
 
@@ -76,6 +76,7 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
 
 ## Resources
 
+- If the trigger or mechanism is still uncertain, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before selecting an artifact.
 - [Target command formats, alternatives, verification, and primary sources](references/target-command-formats.md)
 - [Antigravity workflow template](templates/antigravity-workflow.md)
 - [Portable explicit Skill template for Codex, ChatGPT, and Zed](templates/explicit-skill.md)

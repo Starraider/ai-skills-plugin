@@ -86,7 +86,8 @@ The authoring guidance is based on current primary documentation:
 
 ## Related skills
 
-None required.
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) selects a Skill only when it is the smallest sufficient harness mechanism.
+- [`agent-plugin-builder`](../agent-plugin-builder/README.md) assembles, validates, and releases a portable Agent Plugin containing one or more Skills.
 
 ## License
 

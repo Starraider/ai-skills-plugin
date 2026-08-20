@@ -73,7 +73,9 @@ Also confirm all relative links in `SKILL.md` and `README.md` resolve.
 ## Related skills
 
 - A separately installed Stitch-focused Skill should own Stitch-specific UI prompt enhancement.
-- [`new-skill`](../new-skill/) owns creation and validation of agent skills rather than task prompts.
+- [`new-agents-md`](../new-agents-md/README.md) owns persistent repository guidance rather than a task prompt.
+- [`new-skill`](../new-skill/README.md) owns creation and validation of agent skills rather than task prompts.
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) helps decide whether prompt work is the right harness change.
 
 ## License
 

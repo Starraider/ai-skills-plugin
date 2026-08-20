@@ -24,11 +24,11 @@ Create one focused, repeatable workflow in the selected product's documented for
 
    A workflow is appropriate when the work recurs, has a useful repeatable sequence or handoff, has an observable output, and can be reviewed or safely stopped. Prefer the smallest sufficient alternative when that test fails:
 
-   - **One-off or exploratory work:** use a normal prompt or plan; do not fossilize an unproven process.
-   - **Reusable reasoning or a context-dependent procedure:** use an Agent Skill; make side-effectful procedures explicit-only where the target supports it.
-   - **A short manual prompt shortcut:** use a custom slash command.
-   - **A standing specialist with tools, data, or long-lived ownership:** use an agent.
-   - **A deterministic lifecycle reaction or standing access rule:** use a hook or permission policy.
+   - **One-off or exploratory work:** use a normal prompt or plan; use [`new-prompt`](../new-prompt/README.md) when a ready-to-use prompt is needed; do not fossilize an unproven process.
+   - **Reusable reasoning or a context-dependent procedure:** use [`new-skill`](../new-skill/README.md); make side-effectful procedures explicit-only where the target supports it.
+   - **A short manual prompt shortcut:** use [`new-slash-command`](../new-slash-command/README.md).
+   - **A standing specialist with tools, data, or long-lived ownership:** use [`new-agent`](../new-agent/README.md).
+   - **A deterministic lifecycle reaction or standing access rule:** use [`new-hook`](../new-hook/README.md) or a permission policy.
    - **Time- or API-triggered unattended work:** use the target's task/automation/agent scheduling surface.
    - **Repository events, reproducibility, or merge gates:** use CI or a repository task.
 
@@ -83,6 +83,7 @@ Create one focused, repeatable workflow in the selected product's documented for
 
 ## Resources
 
+- If the trigger or mechanism is still uncertain, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before selecting an artifact.
 - [Target workflow formats, selection guidance, validation, and primary sources](references/target-workflow-formats.md)
 - [Universal workflow instruction outline](templates/workflow-outline.md)
 - [Windsurf native workflow template](templates/windsurf-workflow.md)

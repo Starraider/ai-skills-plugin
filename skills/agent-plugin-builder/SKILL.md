@@ -87,6 +87,8 @@ Produce a self-contained Agent Plugins 1.0.0 directory whose portable components
 
 ## Resources
 
+- When the needed harness artifact is not yet clear, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) to select the smallest sufficient mechanism before packaging it.
+- Use [`new-skill`](../new-skill/README.md) to author or materially revise the Agent Skills that this package contains.
 - [Portable package and manifest](references/portable-package.md)
 - [MCP server configuration](references/mcp-servers.md)
 - [Client extensions](references/client-extensions.md)
