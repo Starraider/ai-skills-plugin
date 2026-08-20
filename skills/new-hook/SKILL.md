@@ -1,6 +1,6 @@
 ---
 name: new-hook
-description: Use when deciding whether a lifecycle or event hook is the right solution, or when creating or revising one for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Select exactly one target and documented event model; recommend a Skill, plugin/app, permission policy, task, automation, or CI when a hook is unsupported or unsuitable.
+description: Use when deciding whether a lifecycle or event hook is the right solution, or when creating or revising one for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI. Select exactly one target and documented event model; recommend a Skill, plugin/app, permission policy, task, automation, or CI when a hook is unsupported or unsuitable.
 license: CC-BY-4.0
 ---
 
@@ -34,6 +34,7 @@ Create one narrow, deterministic, and testable hook for a selected product, or e
    - **MCP server, app, or plugin:** a new capability or a maintained integration rather than an event reaction.
    - **Task, worktree setup, CI, or scheduler:** a build/deploy/check that is tied to a worktree, commit, time, or repository event instead of an agent lifecycle event.
    - **ChatGPT:** do not invent a local lifecycle hook. Use a Skill for repeatable behavior, a Plugin/App/MCP integration for tools, or an approved scheduled/Workspace Agent workflow when that is the actual need.
+   - **Windsurf:** the agent (Cascade) does not expose a general lifecycle hook API. Use `.windsurfrules`, a `.windsurf/workflows/` file, or MCP for integration needs. A limited command hook (`PreToolUse`) exists only for blocking shell-level tool calls; confirm the target surface before implementing.
 
    Explain the recommendation before creating files when it is not a hook.
 
@@ -48,6 +49,11 @@ Create one narrow, deterministic, and testable hook for a selected product, or e
    - **OpenCode:** create a TypeScript/JavaScript plugin, register it in `opencode.json` or `opencode.jsonc`, and use the documented runtime hook API.
    - **Qoder:** add the target-specific JSON configuration to `.qoder/settings.json`, `.qoder/settings.local.json`, or `~/.qoder/settings.json`; create the referenced handler.
    - **Orca:** use an existing compatible Codex or Claude hook for agent lifecycle behavior, or configure a Repository worktree-setup hook for post-worktree setup. Do not fabricate an Orca event-hook file.
+   - **Cursor:** create or revise `.cursor/hooks.json` (project) or `~/.cursor/hooks.json` (user); confirm events against the documented set before implementing.
+   - **GitHub Copilot / VS Code:** create a `.json` file in `.github/hooks/` (project) or the user-level hooks directory; verify events against the VS Code Copilot hooks documentation.
+   - **Windsurf:** use `~/.codeium/windsurf/hooks.json` (user) or `.windsurf/hooks.json` (workspace) only for shell-command blocking via `PreToolUse`; for any broader lifecycle need, take the alternative branch from step 2.
+   - **Kiro:** create or revise a `.json` file under `.kiro/hooks/`; each file may contain multiple hook entries; use `command` or `agent` action types as appropriate.
+   - **Google Agents CLI (ADK):** implement a `BasePlugin` subclass with `before_tool_callback` / `after_tool_callback` (and other documented callbacks); register it in the runner configuration. Do not fabricate a JSON hook file for the ADK.
 
    Completion: exactly one implementation model and one scope are selected; unsupported targets receive an alternative rather than pseudo-configuration.
 

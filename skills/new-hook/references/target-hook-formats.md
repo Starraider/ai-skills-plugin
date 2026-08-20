@@ -1,6 +1,6 @@
 # Target hook formats and research
 
-Last verified: 2026-08-19. Re-check the linked primary documentation immediately before publishing or enabling a hook; lifecycle APIs are fast-moving and a hook has executable authority.
+Last verified: 2026-08-20. Re-check the linked primary documentation immediately before publishing or enabling a hook; lifecycle APIs are fast-moving and a hook has executable authority.
 
 ## Decision table
 
@@ -13,6 +13,11 @@ Last verified: 2026-08-19. Re-check the linked primary documentation immediately
 | OpenCode | The behavior needs a plugin-level transform or runtime interception | A Skill, permission setting, or ordinary command is enough | TypeScript/JavaScript plugin API |
 | Qoder | A documented IDE/CLI lifecycle event needs a deterministic handler | A static permission rule or a slow/durable workflow is better | JSON hook with command/http; CLI also has prompt/agent handlers |
 | Orca | A compatible underlying agent hook or post-worktree setup command has the needed trigger | An Orca-native arbitrary event hook is assumed | Reused `.codex`/`.claude` hooks or Repository worktree setup |
+| Cursor | A deterministic script must observe, gate, or augment a documented agent lifecycle event | A rule, permission setting, or MCP tool is sufficient | JSON command hook (`hooks.json`) |
+| GitHub Copilot / VS Code | A deterministic script must intercept a documented agent session event | A prompt instruction, VS Code extension API, or MCP tool would be more appropriate | JSON command hook (`.github/hooks/*.json`) |
+| Windsurf | Only blocking a shell-level tool call (`PreToolUse`) is needed | Any broader lifecycle intercept, subagent tracking, or post-response work is required | Limited JSON command hook (`hooks.json`); rules/workflows/MCP for everything else |
+| Kiro | A documented IDE/CLI lifecycle event (file, tool, or agent) needs a deterministic handler or an agent prompt injection | A `.kiro/steering/` rule or an MCP integration would be more appropriate | JSON hook files under `.kiro/hooks/` with `command` or `agent` action types |
+| Google Agents CLI (ADK) | A Python plugin callback must observe, gate, or transform tool calls, model calls, or agent events within a Runner | A separate microservice, CI job, or MCP tool integration would be more appropriate | `BasePlugin` subclass with callback methods registered in the Runner |
 
 ## Common design rules
 
@@ -158,8 +163,170 @@ Sources: [Qoder IDE Hooks](https://docs.qoder.com/extensions/hooks), [Qoder CLI 
 
 ## Orca
 
-Orca does not document an independent arbitrary event-hook configuration format. It runs a repository’s existing `.claude/` and `.codex/` hook configurations when launching those agents in a worktree. For worktree provisioning, configure a Repository → Hooks setup command; it runs after a worktree is created. Orca-managed agent-status hooks are controlled by Settings → Agents and `orca agent hooks status|on|off --json`, not authored as application hooks.
+Orca does not document an independent arbitrary event-hook configuration format. It runs a repository's existing `.claude/` and `.codex/` hook configurations when launching those agents in a worktree. For worktree provisioning, configure a Repository → Hooks setup command; it runs after a worktree is created. Orca-managed agent-status hooks are controlled by Settings → Agents and `orca agent hooks status|on|off --json`, not authored as application hooks.
 
 For an agent lifecycle request, create a compatible Codex hook (or applicable Claude hook) and verify it in the exact agent Orca launches. For a setup request, configure the worktree hook through the Orca Repository settings and use an idempotent, safe command such as dependency setup or restoring a non-secret local configuration. Never claim an Orca setup command observes per-tool or per-response events.
 
 Source: [Orca Agent hooks & memory](https://www.onorca.dev/docs/agents/hooks-memory).
+
+## Cursor
+
+Hooks are defined in `hooks.json` at `.cursor/hooks.json` (project, committed to the repository) or `~/.cursor/hooks.json` (user-level, applies to all projects). Cursor loads both and runs all matching hooks. Hooks communicate via stdio JSON: Cursor sends event data on stdin; the handler writes a JSON response to stdout. For blocking events (`beforeShellExecution`, `preToolUse`, `beforeReadFile`, `beforeMCPExecution`, `beforeSubmitPrompt`), Cursor waits for the handler to exit before proceeding.
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "./.cursor/hooks/check-command.sh",
+        "timeout": 10
+      }
+    ]
+  }
+}
+```
+
+Documented events include agent lifecycle events (`sessionStart`, `stop`), tool use events (`preToolUse`, `postToolUse`, `postToolUseFailure`), shell-specific events (`beforeShellExecution`, `afterShellExecution`), file events (`beforeReadFile`, `afterFileEdit`), MCP events (`beforeMCPExecution`, `afterMCPExecution`), prompt events (`beforeSubmitPrompt`), reasoning events (`afterAgentResponse`, `afterAgentThought`), and subagent events (`subagentStart`, `subagentStop`). Cloud Agent support may differ; verify against the cloud support matrix before relying on hooks for automated CI/CD-like workflows.
+
+For blocking hooks: exit code `2` blocks and provides stderr as the reason; exit code `0` allows; any other non-zero fails open unless `failClosed: true` is set. Cursor also reads Claude Code hook configuration if the third-party config option is enabled in Settings → Rules, Skills, Subagents.
+
+Debug hooks using the **Hooks** output channel in Cursor (Output panel). Validate JSON syntax before loading; test with a matching event and then a non-matching event.
+
+Source: [Cursor Hooks](https://www.cursor.com/en/docs/context/hooks).
+
+## GitHub Copilot / VS Code
+
+Hooks are defined in `.json` files inside `.github/hooks/` (project-level, loaded for all team members) or the user-level directory (varies by surface; `~/.copilot/hooks/` in the CLI context). VS Code discovers and loads all `.json` files in `.github/hooks/` automatically. Hooks communicate via stdio JSON: VS Code sends event data on stdin; the handler writes a JSON response to stdout. Default timeout is 30 seconds.
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "./scripts/validate-tool.sh",
+        "timeout": 15
+      }
+    ]
+  }
+}
+```
+
+Documented events include `sessionStart`, `sessionEnd` (or `stop`), `userPromptSubmitted`, `preToolUse`, `postToolUse`, `preCompact`, `subagentStart`, `subagentStop`, and `stop`. For `preToolUse`, the response can include a `permissionDecision` field (`allow`, `ask`, or `deny`) to dynamically control the agent's action.
+
+Ensure hook scripts are executable (`chmod +x`). Debug hooks using the **Developer: Show Agent Debug Logs** command in VS Code. Use MCP servers or the Language Model Tools API when a deeper programmatic integration is required rather than an event-shell hook.
+
+Source: [GitHub Copilot agent hooks](https://code.visualstudio.com/docs/copilot/copilot-customization#_agent-hooks).
+
+## Windsurf
+
+Windsurf (Codeium Cascade) does not expose a general agent lifecycle hook API. It provides a **limited command hook** for shell-command blocking only. Define hooks in `~/.codeium/windsurf/hooks.json` (user) or `.windsurf/hooks.json` (workspace). The file follows a `version` + `hooks` structure using the `PreToolUse` event with a `matcher` regex and a command handler.
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "command": ".windsurf/hooks/check-command.sh",
+        "matcher": "Bash|Write|Edit",
+        "failClosed": true,
+        "timeout": 5
+      }
+    ]
+  }
+}
+```
+
+The handler receives a JSON payload via stdin containing `tool_name` and `tool_input`. Exit code `0` allows; exit code `2` blocks and surfaces stderr as the reason; exit code `1` or other non-zero may not block correctly—always use `2` for intentional blocks. There is no documented `postToolUse`, `sessionStart`, `stop`, `subagentStart`, or similar general lifecycle event for the Cascade agent.
+
+For any broader lifecycle need—such as post-response formatting, session initialization, or context injection—use `.windsurfrules` (behavioral rules), `.windsurf/workflows/` (multi-step task sequences), or MCP servers (tool integrations). Debug hooks through the Output → Hooks panel in the Windsurf IDE.
+
+Source: [Windsurf Memories and Rules](https://docs.windsurf.com/windsurf/memories-and-rules).
+
+## Kiro
+
+Hooks are stored as individual `.json` files inside `.kiro/hooks/` (project scope; shared across Kiro IDE, CLI, and web). Each file follows a versioned schema (`"version": "v1"`) and contains a `hooks` array. Each hook entry has a `name`, `trigger`, an optional `matcher` (regex on tool name or file path), and an `action` of type `command` or `agent`.
+
+```json
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "lint-on-save",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(ts|tsx)$",
+      "action": {
+        "type": "command",
+        "command": "npx eslint --fix"
+      }
+    }
+  ]
+}
+```
+
+Documented triggers include file events (`FileCreate`, `PostFileSave`, `FileDelete`), tool events (`PreToolUse`, `PostToolUse`, including MCP tool hooks), agent/task events (`PromptSubmit`, `AgentStop`, `PreTaskExecution`, `PostTaskExecution`), and a manual trigger via the IDE Agent Hooks panel. Some triggers (e.g., `AgentSpawn`) are CLI-only; `PreTaskExecution` and `PostTaskExecution` are IDE-only.
+
+For `PreToolUse` with a `command` action: exit code `0` allows; exit code `2` blocks and sends stderr to the agent as feedback. The handler receives session context via stdin as JSON. An `agent` action type injects a prompt into the conversation rather than running a shell command.
+
+Use the IDE Agent Hooks panel or natural language conversation to create hooks instead of editing JSON manually. If migrating from an older Kiro version, run `kiro-cli agent migrate` to convert embedded hooks to the new per-file format. Restart the IDE after configuration changes.
+
+Sources: [Kiro Agent Hooks](https://kiro.dev/docs/hooks/), [Kiro Hooks reference](https://kiro.dev/docs/reference/hooks).
+
+## Google Agents CLI (ADK)
+
+The Google Agent Development Kit (ADK) uses Python plugin callbacks rather than a JSON hook file. Implement a `BasePlugin` subclass and register it with the `Runner` that manages the agent. The plugin's callback methods intercept the corresponding lifecycle point.
+
+```python
+from google.adk.plugins import BasePlugin
+from google.adk.tools import BaseTool
+from google.adk.tools.tool_context import ToolContext
+from typing import Any, Optional
+
+class ToolLoggerPlugin(BasePlugin):
+    name = "tool-logger"
+
+    async def before_tool_callback(
+        self,
+        *,
+        tool: BaseTool,
+        tool_args: dict[str, Any],
+        tool_context: ToolContext,
+    ) -> Optional[dict]:
+        # Return None to proceed; return a dict to short-circuit and use it as the result.
+        print(f"BEFORE: {tool.name}({tool_args})", flush=True)
+        return None
+
+    async def after_tool_callback(
+        self,
+        *,
+        tool: BaseTool,
+        tool_args: dict[str, Any],
+        tool_context: ToolContext,
+        tool_response: dict,
+    ) -> Optional[dict]:
+        # Return None to pass the original result through; return a dict to replace it.
+        print(f"AFTER: {tool.name} -> {tool_response}", flush=True)
+        return None
+```
+
+Documented callback hooks include `before_tool_callback` / `after_tool_callback` (tool calls), `before_model_callback` / `after_model_callback` (LLM requests), `on_event` (any agent event), and session/agent lifecycle callbacks depending on the ADK version. Note that some built-in model tools (e.g., `VertexAiSearchTool`, `GoogleSearchTool`) execute server-side and **do not** trigger client-side callbacks.
+
+Register the plugin with the runner:
+
+```python
+from google.adk.runners import Runner
+
+runner = Runner(
+    agent=root_agent,
+    app_name="my-app",
+    session_service=session_service,
+    plugins=[ToolLoggerPlugin()],
+)
+```
+
+Requires ADK ≥ 1.26.0 for correct registration in live (bi-directional streaming) mode. Do not perform heavy blocking work inside synchronous callbacks. Avoid network-dependent work; use background services or Cloud Tasks for durable side effects. Do not store credentials or secrets in plugin source or logs.
+
+Sources: [ADK Callbacks](https://google.github.io/adk-docs/callbacks/), [ADK Plugins](https://google.github.io/adk-docs/plugins/), [ADK GitHub](https://github.com/google/adk-python).

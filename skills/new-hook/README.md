@@ -8,9 +8,9 @@ It turns a loosely stated request such as “block unsafe commands” or “set 
 
 ## Use when
 
-- Creating, revising, or debugging an event-driven hook for Antigravity, Codex, Zed, OpenCode, Qoder, or Orca.
+- Creating, revising, or debugging an event-driven hook for Antigravity, Codex, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI.
 - Deciding whether a requested behavior should be a hook, Skill, permission policy, plugin/app/MCP integration, task, CI check, or automation.
-- Assessing a ChatGPT request that is described as a hook and needs a supported alternative.
+- Assessing a ChatGPT or Windsurf request that is described as a hook and needs a supported alternative.
 
 Do not use this skill for a generic event bus, an OpenAI API webhook receiver, or a Git hook unless the request is specifically about the target client’s agent/worktree integration.
 
@@ -38,6 +38,11 @@ This directory is an Agent Skill inside the repository’s portable plugin. Keep
 | Qoder | `.qoder/skills/new-hook/` | `~/.qoder/skills/new-hook/` |
 | Orca | Install as a compatible Agent Skill for the launched agent | Install in that agent’s global Skills location |
 | ChatGPT Desktop App | Upload the complete skill through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
+| Cursor | `.cursor/skills/new-hook/` | `~/.cursor/skills/new-hook/` |
+| GitHub Copilot / VS Code | `.github/skills/new-hook/` | `~/.copilot/skills/new-hook/` |
+| Windsurf | `.windsurf/skills/new-hook/` | `~/.codeium/windsurf/skills/new-hook/` |
+| Kiro | `.kiro/skills/new-hook/` | `~/.kiro/skills/new-hook/` |
+| Google Agents CLI | `.agents/skills/new-hook/` or package inside the ADK agent directory | `~/.agents/skills/new-hook/` |
 
 The hook itself is configured separately in the selected product; see [target hook formats and research](references/target-hook-formats.md).
 
@@ -48,6 +53,11 @@ The hook itself is configured separately in the selected product; see [target ho
 - “Set up Qoder to run Prettier after the agent edits TypeScript files, without blocking the edit.”
 - “Make a Zed hook that copies `.env` into each newly created worktree.”
 - “Create a ChatGPT hook after every response that posts to Slack.”
+- “In Cursor, add a project-level hook that blocks shell commands containing `sudo` and logs the attempt to stderr.”
+- “Add a GitHub Copilot hook for VS Code that runs `npm test` after every file edit and surfaces failures to the agent.”
+- “Set up a Windsurf hook that blocks the Cascade agent from running any `git push` command without confirmation.”
+- “Create a Kiro hook that lints TypeScript files on every save and injects the result as an agent prompt.”
+- “Add a Google ADK plugin that logs every tool call to Cloud Logging before and after execution.”
 
 ## Validation
 
@@ -55,14 +65,14 @@ Validate this skill’s portable structure from the repository root:
 
 ```bash
 skills/new-skill/scripts/validate-skill.sh skills/new-hook \
-  --clients codex,antigravity,opencode,qoder
+  --clients codex,antigravity,opencode,qoder,cursor,copilot,windsurf,kiro,google-agents-cli
 ```
 
 Then follow the target’s loading and behavioral test in [target hook formats and research](references/target-hook-formats.md). Test a no-op or allowed path as well as the condition that triggers the hook.
 
 ## Sources
 
-Research was verified on 2026-08-19 against the primary documentation linked in [target hook formats and research](references/target-hook-formats.md). The products do not expose interchangeable hook models: ChatGPT does not document a comparable local lifecycle hook, Zed’s documented hook is worktree-task specific, and Orca either reuses underlying agent hooks or runs a worktree setup command.
+Research was verified on 2026-08-20 against the primary documentation linked in [target hook formats and research](references/target-hook-formats.md). The products do not expose interchangeable hook models: ChatGPT does not document a comparable local lifecycle hook, Zed’s documented hook is worktree-task specific, Orca either reuses underlying agent hooks or runs a worktree setup command, Windsurf exposes only a limited shell-command hook rather than a full lifecycle API, and Google Agents CLI uses Python plugin callbacks rather than a JSON hook file.
 
 ## Related skills
 
