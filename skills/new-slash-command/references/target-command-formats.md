@@ -8,7 +8,7 @@ Last researched: 2026-08-19. Product command models change quickly. Re-check the
 | --- | --- | --- | --- |
 | Antigravity | Markdown Workflow, invoked as `/workflow-name` | Rule for persistent behavior; Skill for reusable knowledge | A Rule is a command, or an undocumented file path works in the IDE |
 | Codex | No user-authored `/name` artifact documented | Explicit Skill, invoked as `$skill-name` | `/skills` creates or invokes a custom command |
-| ChatGPT | No user-authored `/name` artifact documented | Skill, selected with `@skill-name` | A typed text convention is a native slash command |
+| ChatGPT Desktop App | No user-authored `/name` artifact documented | Skill, selected with `@skill-name` | A typed text convention is a native slash command |
 | Zed | Explicit Skill, invoked as `/skill-name` | Skill remains the native reusable-procedure model | A separate custom-command file exists |
 | OpenCode | Markdown or JSON command | Skill, agent, or automation when the task is richer or unattended | A command changes the permission policy |
 | Qoder | Markdown custom command | Skill for automatic/contextual behavior; Dynamic Workflow for orchestration | A command is a TUI extension or automation trigger |
@@ -30,11 +30,11 @@ In Codex CLI or the IDE extension, run `/skills` to browse skills or type `$` to
 
 Source: [Build skills for ChatGPT and Codex](https://developers.openai.com/codex/skills).
 
-## ChatGPT
+## ChatGPT Desktop App
 
-ChatGPT’s documented reusable-procedure model is an **Agent Skill**, not a user-created slash command. Create it in **Plugins → Skills → Create** (with chat, editor, or upload), then select the skill in a conversation by typing `@`. Build the same portable Skill payload as for Codex, using [the explicit Skill template](../templates/explicit-skill.md), and make it clear in the delivery that invocation is `@skill-name` rather than `/skill-name`.
+In the ChatGPT Desktop App, the documented reusable-procedure model is an **Agent Skill**, not a user-created slash command. Upload the skill directory or archive in **Plugins → Skills → Create → Upload from your computer** (or create it with chat/editor), then select the skill in a conversation by typing `@`. Build the same portable Skill payload as for Codex, using [the explicit Skill template](../templates/explicit-skill.md), and make it clear in the delivery that invocation is `@skill-name` rather than `/skill-name`.
 
-Creation, upload, installation, sharing, connector changes, or publishing affect external state. Draft the builder brief and request authority immediately before taking those actions. Verify availability by opening the Skills tab and selecting the skill in a harmless conversation.
+Creation, upload, installation, sharing, connector changes, or publishing affect external/local state. Draft the builder brief and request authority immediately before taking those actions. Verify availability by opening the Skills tab in the desktop app and selecting the skill in a harmless conversation.
 
 Sources: [Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt), [Build skills for ChatGPT and Codex](https://developers.openai.com/codex/skills).
 

@@ -54,8 +54,9 @@ Install this complete directory, including `references/` and `evals/`, alongside
 | OpenCode | `.opencode/skills/improve-my-ai-harness/` or `.agents/skills/improve-my-ai-harness/` | `~/.config/opencode/skills/improve-my-ai-harness/` or `~/.agents/skills/improve-my-ai-harness/` |
 | Qoder | `.qoder/skills/improve-my-ai-harness/` | `~/.qoder/skills/improve-my-ai-harness/` |
 | Orca | `.agents/skills/improve-my-ai-harness/` | `~/.agents/skills/improve-my-ai-harness/` |
+| ChatGPT Desktop App | Upload through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
 
-For ChatGPT, upload this skill directory with all supporting files through the Skills interface. The downstream builder skills referenced by the implementation prompt must also be installed and available.
+For the ChatGPT Desktop App, upload this skill directory with all supporting files through the desktop app's Plugins → Skills interface (**Create → Upload from your computer**). The downstream builder skills referenced by the implementation prompt must also be installed and available in the desktop app.
 
 ## Example prompts
 
@@ -74,7 +75,7 @@ skills-ref validate skills/improve-my-ai-harness
 python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
 ```
 
-Behavioral cases are maintained in [`evals/evals.json`](evals/evals.json). They cover iterative discovery, a layered recommendation, a deterministic hook decision, and a request that should route directly to another builder.
+Behavioral cases are maintained in `evals/evals.json`. They cover iterative discovery, a layered recommendation, a deterministic hook decision, and a request that should route directly to another builder.
 
 ## Related skills
 

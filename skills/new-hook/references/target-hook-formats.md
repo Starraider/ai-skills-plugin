@@ -8,7 +8,7 @@ Last verified: 2026-08-19. Re-check the linked primary documentation immediately
 | --- | --- | --- | --- |
 | Antigravity | A command must run before/after a documented agent action or lifecycle point | The task needs model judgment, durable queues, or broad plugin functionality | JSON command hook |
 | Codex | A local deterministic script must observe, gate, rewrite, or augment a documented lifecycle event | A permission rule or skill suffices, or the action involves hosted tools not on the local hook path | JSON or inline TOML command hook |
-| ChatGPT | Never claim a local lifecycle hook | The request needs repeatable behavior, scheduled work, or an integration | Skill, Plugin/App/MCP, or approved automation/workspace workflow |
+| ChatGPT Desktop App | Never claim a local lifecycle hook | The request needs repeatable behavior, scheduled work, or an integration | Skill, Plugin/App/MCP, or approved automation/workspace workflow |
 | Zed | Only setup immediately after Zed creates a linked worktree | The desired trigger is an agent/tool/message lifecycle event | `tasks.json` `create_worktree` task hook |
 | OpenCode | The behavior needs a plugin-level transform or runtime interception | A Skill, permission setting, or ordinary command is enough | TypeScript/JavaScript plugin API |
 | Qoder | A documented IDE/CLI lifecycle event needs a deterministic handler | A static permission rule or a slow/durable workflow is better | JSON hook with command/http; CLI also has prompt/agent handlers |
@@ -78,9 +78,9 @@ Validate JSON with `jq empty .codex/hooks.json`, review/trust the discovered hoo
 
 Sources: [Codex Hooks](https://developers.openai.com/codex/hooks), [Codex configuration](https://developers.openai.com/codex/config-reference).
 
-## ChatGPT
+## ChatGPT Desktop App
 
-As of this verification, ChatGPT’s documented reusable workflow mechanism is a Skill; its Plugins can package Skills with Apps and app templates. The product documentation does not document a user-configured local pre/post tool or response lifecycle-hook file comparable to Codex, Antigravity, OpenCode, or Qoder.
+As of this verification, the ChatGPT Desktop App’s documented reusable workflow mechanism is an Agent Skill (managed under Plugins → Skills); its Plugins can package Skills with Apps and app templates. The product documentation does not document a user-configured local pre/post tool or response lifecycle-hook file comparable to Codex, Antigravity, OpenCode, or Qoder.
 
 Do not write fictitious `hooks.json`, browser-script, or webhook configuration for a ChatGPT “hook.” Explain the constraint and choose the request’s real mechanism: a Skill for deterministic operating guidance, a Plugin/App/MCP tool for an integration, or an approved scheduled/Workspace Agent workflow for a time-triggered outcome. Creation, connection, scheduling, publication, and external writes remain user-authorized operations.
 

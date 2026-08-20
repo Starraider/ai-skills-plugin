@@ -18,11 +18,11 @@ Codex reads global guidance from `$CODEX_HOME/AGENTS.override.md` or `$CODEX_HOM
 - Use nested files only for a subtree with different instructions. Use `AGENTS.override.md` only for an intentional local override.
 - Verify with `codex --ask-for-approval never "Summarize the current instructions."` from the relevant directory. To check an override, add `--cd <subdirectory>` and ask for active instruction sources.
 
-## ChatGPT
+## ChatGPT and ChatGPT Desktop App
 
-The documented `AGENTS.md` behavior is for Codex; its current documentation is hosted in ChatGPT Learn and covers Codex-backed coding work. A general ChatGPT Project, custom GPT, or Workspace Agent should not be represented as automatically loading a local `AGENTS.md` unless the user supplies documentation for that surface. [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+The documented `AGENTS.md` behavior is for Codex and Codex-backed coding surfaces; its current documentation is hosted in ChatGPT Learn. A standard ChatGPT conversation (whether on web or in the desktop app), Project, custom GPT, or Workspace Agent does not automatically discover and load a local `AGENTS.md` file from the filesystem. [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 
-- If the user means ChatGPT Desktop or another Codex-backed coding surface, use the Codex branch and verify in a new coding session.
+- If the user means the ChatGPT Desktop App connected to a coding workspace (via Codex or Work with Apps / developer tools), follow the Codex branch and verify in a new coding session.
 - Otherwise, create a repository artifact only if requested, label it as portable guidance, and explain that it must be attached, imported, or copied into that ChatGPT surface according to its own configuration workflow.
 
 ## Zed

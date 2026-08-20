@@ -32,7 +32,7 @@ def package_files(skill_dir: Path) -> Iterable[Path]:
         relative = path.relative_to(skill_dir)
         if any(part in EXCLUDED_PARTS for part in relative.parts):
             continue
-        if path.name in EXCLUDED_NAMES or path.suffix in EXCLUDED_SUFFIXES:
+        if path.name in {".DS_Store"} or (path.name == "AGENTS.md" and relative == Path("AGENTS.md")) or path.suffix in EXCLUDED_SUFFIXES:
             continue
         if path.is_symlink():
             raise ValueError(f"refusing to package symlink: {relative}")

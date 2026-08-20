@@ -39,6 +39,8 @@ Inside any Agent Plugins 1.0.0 package, install this skill at the standard disco
 
 The directory must contain `SKILL.md` directly beneath it. A skills-capable Agent Plugins client discovers it as an immediate child of `skills/`; the standard intentionally leaves client installation and enablement UX unspecified.
 
+For the ChatGPT Desktop App, which does not load local filesystem Agent Plugins packages directly, install this skill through the Skill installation flow: upload the complete `skills/agent-plugin-builder/` directory (with all supporting scripts and references) via **Plugins → Skills → Create → Upload from your computer**.
+
 For standalone development in this repository, use the `skills/agent-plugin-builder/` directory as the skill source.
 
 ## Example prompts

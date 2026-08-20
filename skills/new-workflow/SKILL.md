@@ -40,7 +40,7 @@ Create one focused, repeatable workflow in the selected product's documented for
 
    - **Antigravity:** create a native Markdown Workflow through the IDE's Workflows customization panel; it is manually invoked as `/workflow-name`.
    - **Codex:** use an eligible ChatGPT Workspace Agent through the Workspace Agents plugin for a shared, scheduled, or API-triggered workflow. If it is unavailable, create an explicit Codex Skill for a reusable procedure; Codex does not document a separate local workflow file.
-   - **ChatGPT:** use a Workspace Agent for repeatable multi-step work; use a Scheduled Task only for a simple time/API-triggered prompt without a reusable agent configuration.
+   - **ChatGPT / ChatGPT Desktop App:** for a manual reusable procedure in desktop chat, create an explicit Agent Skill (invoked via `@skill-name`). For governed multi-step work across tools or schedules, use a Workspace Agent (configured via web Agent Studio); use a Scheduled Task only for a simple time/API-triggered prompt without a reusable agent configuration.
    - **Zed:** create an explicit-invocation Agent Skill for a reusable procedure; Zed documents Skills—not a separate workflow artifact—for reusable task instructions.
    - **OpenCode:** create a Markdown custom command for a manually invoked prompt workflow. Use a skill or agent instead when the procedure needs conditional resources or a specialist tool boundary.
    - **Qoder:** create a Markdown custom command for a single-agent reusable procedure. Use Dynamic workflows from `/workflows` only for actual multi-agent decomposition and orchestration.

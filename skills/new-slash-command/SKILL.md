@@ -40,7 +40,7 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
 
    - **Antigravity:** create a native Markdown Workflow; users invoke it as `/workflow-name`.
    - **Codex:** create an explicit Agent Skill; users invoke it with `$skill-name` (not a user-defined `/name` command).
-   - **ChatGPT:** create an Agent Skill; users invoke it with `@skill-name` (not a user-defined `/name` command).
+   - **ChatGPT / ChatGPT Desktop App:** create an Agent Skill; users invoke it with `@skill-name` in desktop chat (not a user-defined `/name` command).
    - **Zed:** create an explicit Agent Skill with `disable-model-invocation: true`; users invoke it as `/skill-name`.
    - **OpenCode:** create a native Markdown custom command.
    - **Qoder:** create a native Markdown custom command.

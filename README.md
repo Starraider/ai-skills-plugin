@@ -129,13 +129,9 @@ role and make the plugin Available or Installed. This repository is not itself
 a listed Plugin Directory entry, so there is no marketplace install button for
 it today. See [Plugins in ChatGPT and Codex](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt-and-codex).
 
-### ChatGPT
+### ChatGPT Desktop App
 
-ChatGPT installs standalone skills, not local filesystem plugin directories.
-Upload the nine skill directories separately; each must include its required
-`SKILL.md` and all of its supporting files. The root `plugin.json` is for
-portable package distribution and is not a replacement for a skill upload.
-See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
+The ChatGPT Desktop App (on macOS and Windows) installs standalone Agent Skills rather than loading local filesystem Agent Plugins 1.0.0 package directories directly. Because the desktop app does not support importing raw local plugin bundles containing `plugin.json`, install this package according to the individual Skill installation workflow: upload each of the nine skill directories separately. Each upload must include its required `SKILL.md` and all supporting files, references, templates, and scripts. The root `plugin.json` is for portable package distribution and is not a replacement for a skill upload. See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
 
 1. Create one archive per skill directory (or select the directory and all its
    files in the upload picker):
@@ -155,19 +151,11 @@ See [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
    )
    ```
 
-2. In ChatGPT, select **Plugins** in the sidebar, open the **Skills** tab, then
-   choose **Create** → **Upload from your computer**.
-3. Upload each skill archive and complete the safety review if ChatGPT marks it
-   **Needs Review**. A blocked upload cannot be used.
-4. Use `@` in a chat to select an installed skill, or send a request that
-   matches its description. There is no client restart; the skill is available
-   when ChatGPT finishes scanning it.
+2. In the ChatGPT Desktop App, select **Plugins** in the sidebar (or navigate via **Settings → Plugins**), open the **Skills** tab, then choose **Create** → **Upload from your computer**.
+3. Upload each skill archive or directory and complete the safety review if the desktop app marks it **Needs Review**. A blocked upload cannot be used.
+4. Use `@` in a desktop chat session to select an installed skill, or send a request that matches its description. There is no client restart; the skill is available when the ChatGPT Desktop App finishes scanning it. Note that skills installed in the desktop app do not automatically sync across web or mobile surfaces and are managed locally within the desktop application.
 
-**Plugin Directory / marketplace route:** A published version can be installed
-from the Plugin Directory after reviewing its included skills and any required
-apps. Workspace administrators may need to enable the plugin for the user’s
-role. This repository is not currently published there, so manual skill upload
-is the applicable route.
+**Plugin Directory / marketplace route:** A published version can be installed from the Plugin Directory in the ChatGPT Desktop App after reviewing its included skills and any required apps. Workspace administrators may need to enable the plugin for the user’s role. This repository is not currently published there, so manual skill upload via the desktop app is the applicable route.
 
 ### Zed
 

@@ -24,14 +24,14 @@ The current public official documentation clearly supports a separate **Workspac
 
 Sources: [Workspace Agents in ChatGPT and Codex](https://help.openai.com/en/articles/20001143), [Codex Skills](https://developers.openai.com/codex/skills). The local TOML format should be rechecked against the installed Codex version before use because it is not currently described in the above public OpenAI help page.
 
-## ChatGPT
+## ChatGPT and ChatGPT Desktop App
 
-There are two native agent surfaces:
+There are two native agent surfaces in the ChatGPT ecosystem:
 
-- A **Custom GPT**: available in eligible Business, Enterprise, and Edu workspaces with the relevant permissions. Create in the GPT builder, configure name/description/starters, instructions, optional knowledge, capabilities, and either apps or actions (not both), then Preview before saving.
-- A **Workspace Agent**: built from ChatGPT’s Agents area. It can use tools, apps, custom MCPs, skills, files, channels, schedules, and API triggers according to workspace permission. Keep write actions set to confirmation unless the user explicitly approves a narrower policy.
+- A **Custom GPT**: available in eligible Business, Enterprise, and Edu workspaces with the relevant permissions. Created and configured in the web GPT builder (name, description, starters, instructions, optional knowledge files, capabilities, and either apps or actions), then tested in Preview before saving.
+- A **Workspace Agent**: built from ChatGPT’s web Agents area / Agent Studio. It can use tools, apps, custom MCPs, skills, files, channels, schedules, and API triggers according to workspace permission. Keep write actions set to confirmation unless the user explicitly approves a narrower policy.
 
-Generate a builder brief, do not create it automatically. Ask before remote creation, sharing, publishing, schedule/API-trigger configuration, or connector changes. Verify in Preview with the agreed representative prompt.
+Both Custom GPTs and Workspace Agents are configured and authored through OpenAI's web builder interfaces rather than local filesystem configuration files in the desktop app, but can be invoked and interacted with directly inside the ChatGPT Desktop App once published or shared. Generate a builder brief rather than attempting to write a local configuration file. Ask before remote creation, sharing, publishing, schedule/API-trigger configuration, or connector changes. Verify in Preview with the agreed representative prompt.
 
 Sources: [Creating and editing GPTs](https://help.openai.com/en/articles/8554397-), [Workspace Agents](https://help.openai.com/en/articles/20001143).
 

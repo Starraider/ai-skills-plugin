@@ -35,7 +35,7 @@ This is a portable Agent Skill. Keep its complete directory together when instal
 | OpenCode | `.opencode/skills/new-slash-command/` or `.agents/skills/new-slash-command/` | `~/.config/opencode/skills/new-slash-command/` |
 | Qoder | `.qoder/skills/new-slash-command/` | `~/.qoder/skills/new-slash-command/` |
 | Orca | Install as a compatible Agent Skill for the launched agent | Install in that agent’s global Skills location |
-| ChatGPT | Upload through Plugins → Skills | Install through the Skills UI |
+| ChatGPT Desktop App | Upload through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
 
 ## Example prompts
 

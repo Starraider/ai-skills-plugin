@@ -37,7 +37,7 @@ This directory is an Agent Skill inside the repository’s portable plugin. Keep
 | OpenCode | `.opencode/skills/new-hook/` or `.agents/skills/new-hook/` | `~/.config/opencode/skills/new-hook/` |
 | Qoder | `.qoder/skills/new-hook/` | `~/.qoder/skills/new-hook/` |
 | Orca | Install as a compatible Agent Skill for the launched agent | Install in that agent’s global Skills location |
-| ChatGPT | Upload the complete skill through Plugins → Skills | Install through the Skills UI |
+| ChatGPT Desktop App | Upload the complete skill through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
 
 The hook itself is configured separately in the selected product; see [target hook formats and research](references/target-hook-formats.md).
 

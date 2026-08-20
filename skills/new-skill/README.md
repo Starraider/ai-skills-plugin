@@ -37,6 +37,7 @@ Skills using the portable core work in every implementation of the Agent Skills 
 | Antigravity | `.agents/skills/new-skill/` | `~/.gemini/config/skills/new-skill/` |
 | OpenCode | `.opencode/skills/new-skill/` or `.agents/skills/new-skill/` | `~/.config/opencode/skills/new-skill/` or `~/.agents/skills/new-skill/` |
 | Qoder | `.qoder/skills/new-skill/` | `~/.qoder/skills/new-skill/` |
+| ChatGPT Desktop App | Upload the skill directory through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
 
 See [client compatibility](references/client-compatibility.md) for invocation controls, precedence, alternate paths, and client-specific metadata.
 

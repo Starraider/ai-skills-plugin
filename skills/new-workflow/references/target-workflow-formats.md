@@ -8,7 +8,7 @@ Last researched: 2026-08-19. Re-check the linked primary documentation before cr
 | --- | --- | --- | --- |
 | Antigravity | Native Markdown Workflow | Use a workflow's explicit steps; choose a hook or task for an actual lifecycle/event reaction | Rules are workflows, or a project file path not documented by the IDE |
 | Codex | Explicit Codex Skill | Eligible Workspace Agent via the Workspace Agents plugin | A separate local Codex workflow file exists |
-| ChatGPT | Workspace Agent | Workspace Agent schedule/API trigger; Scheduled Task only for simple recurring prompts | A Task is a general workflow-definition file |
+| ChatGPT Desktop App | Explicit Agent Skill (`@skill-name`) | Workspace Agent (via web Agent Studio) for scheduled/API triggers; Scheduled Task for recurring prompts | A Task or desktop skill is a local workflow-file format |
 | Zed | Explicit Agent Skill | Use a native agent, external automation, or CI when the work needs a trigger outside an agent request | Zed has a separate native workflow artifact |
 | OpenCode | Markdown custom command | A Skill/agent for rich context; external scheduler/CI for unattended jobs | A custom command grants permissions or is an event trigger |
 | Qoder | Markdown custom command | Dynamic workflow for true multi-agent orchestration; Headless mode/CI for unattended execution | The `/workflows` panel itself creates a custom command |
@@ -32,15 +32,17 @@ Verify a Skill with `/skills` and explicit invocation. Verify a Workspace Agent 
 
 Sources: [Codex Skills](https://developers.openai.com/codex/skills), [ChatGPT Workspace Agents](https://help.openai.com/en/articles/20001143/).
 
-## ChatGPT
+## ChatGPT Desktop App and ChatGPT
 
-Use a **Workspace Agent** for a repeatable, multi-step procedure with named tools, guardrails, optional skills, and potentially a schedule or API trigger. In **Agents**, create a draft, review its plan, add only necessary tools/files/skills, and preview representative inputs before creating or publishing it. Keep write actions at **Always ask** unless the user explicitly authorizes a narrower exception.
+In the ChatGPT Desktop App, the native mechanism for a manual, user-invoked reusable procedure is an **Agent Skill** (`SKILL.md`), installed via **Plugins → Skills** and selected in desktop chat conversations by typing `@skill-name`.
 
-Use a **Scheduled Task** for a simple prompt that should recur at a time/cadence or through the supported API. Tasks cannot use GPTs or file uploads and are limited to ten active tasks. Do not turn a short reminder into a Workspace Agent unless reusable context, tools, or a governed process is actually needed.
+For an organizational, multi-step governed process with named tools, guardrails, integrations, and schedules or API triggers, configure a **Workspace Agent** via ChatGPT’s web Agents area / Agent Studio. In **Agents**, create a draft, review its plan, add only necessary tools/files/skills, and preview representative inputs before creating or publishing it. Once published, Workspace Agents can be interacted with across ChatGPT surfaces including the Desktop App. Keep write actions at **Always ask** unless the user explicitly authorizes a narrower exception.
+
+Use a **Scheduled Task** only for a simple prompt that should recur at a time/cadence or through the supported API. Tasks cannot use GPTs or file uploads and are limited to ten active tasks. Do not claim that the ChatGPT Desktop App has a local workflow definition file or treat a Scheduled Task as a general workflow file.
 
 Creating, sharing, changing connectors, enabling a schedule, and adding an API trigger are external state changes. Produce a builder brief and obtain authority immediately before those changes.
 
-Sources: [Workspace Agents](https://help.openai.com/en/articles/20001143/), [Scheduled Tasks](https://help.openai.com/en/articles/10291617-tasks-inchatgpt).
+Sources: [Workspace Agents](https://help.openai.com/en/articles/20001143/), [Scheduled Tasks](https://help.openai.com/en/articles/10291617-tasks-inchatgpt), [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
 
 ## Zed
 

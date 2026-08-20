@@ -39,6 +39,7 @@ Install this directory in a skill location discovered by the target client:
 | Antigravity | `.agents/skills/new-prompt/` | `~/.gemini/config/skills/new-prompt/` |
 | OpenCode | `.opencode/skills/new-prompt/` or `.agents/skills/new-prompt/` | `~/.config/opencode/skills/new-prompt/` or `~/.agents/skills/new-prompt/` |
 | Qoder | `.qoder/skills/new-prompt/` | `~/.qoder/skills/new-prompt/` |
+| ChatGPT Desktop App | Upload the skill directory through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
 
 The core skill is portable. Exact support for system/developer messages, reasoning controls, sampling parameters, structured outputs, and tool choice depends on the selected model API.
 

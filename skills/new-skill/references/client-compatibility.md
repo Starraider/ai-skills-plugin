@@ -29,6 +29,7 @@ For cross-client output, avoid experimental `allowed-tools`, keep client policy 
 | Antigravity | `.agents/skills/<name>/` | `~/.gemini/config/skills/<name>/`; the IDE also recognizes open-standard user skills | Automatic by description; ask for available skills to verify | Name may default from directory, but portable output should include it; Antigravity CLI paths differ |
 | OpenCode | `.opencode/skills/<name>/`, `.agents/skills/<name>/`, or `.claude/skills/<name>/` | `~/.config/opencode/skills/<name>/`, `~/.agents/skills/<name>/`, or `~/.claude/skills/<name>/` | Agent loads through the native `skill` tool | Only the five documented frontmatter fields are interpreted; permissions belong in `opencode.json` |
 | Qoder | `.qoder/skills/<name>/` | `~/.qoder/skills/<name>/` | Automatic by description; manual `/name`; `/skills` lists | Project skill overrides a same-named user skill; CLI can reload with `/skills reload` |
+| ChatGPT Desktop App | Upload folder/zip via desktop app Plugins → Skills | Managed in desktop app Plugins → Skills UI | Automatic by description; manual `@name` | Follows open Agent Skills standard (`SKILL.md`); skills are local to desktop app and do not sync across surfaces |
 
 ## Claude Code
 
@@ -130,9 +131,19 @@ For Qoder CLI, use `/skills reload` after edits in a running session. For the ID
 
 Qoder recommends recording version changes. Put human-facing history in the README or changelog unless the runtime genuinely needs it; duplicating release history in `SKILL.md` wastes invoked context.
 
+## ChatGPT Desktop App
+
+Primary source: [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
+
+The ChatGPT Desktop App (on macOS and Windows) installs standalone Agent Skills adhering to the open Agent Skills standard. Upload the complete skill directory (or ZIP archive) containing `SKILL.md` directly through **Plugins → Skills → Create → Upload from your computer**.
+
+- **Discovery and invocation:** Skills are discovered automatically based on their `description` and can be explicitly selected in desktop chat conversations by typing `@skill-name`.
+- **Local isolation:** Installed skills are stored within the desktop application and do not automatically sync across web or mobile sessions.
+- **Safety scanning:** The desktop app scans uploaded skill packages upon import, flagging items requiring approval before they can be used.
+
 ## Cross-client decisions
 
-- For all six clients, use only the portable core and install or symlink the same directory into each discovery path.
+- For all supported clients, use only the portable core and install or symlink the same directory into each discovery path (or upload to the ChatGPT Desktop App).
 - For explicit-only invocation, create client overlays: Claude/Cursor use `disable-model-invocation`, Codex uses `agents/openai.yaml`, and OpenCode uses permission configuration. Antigravity and Qoder do not document an equivalent portable switch.
 - For tool restrictions, configure the client's permission system. Do not treat frontmatter as a security boundary.
 - For reusable distribution, package the portable skill payload first, then add client manifests around it. Never fork the behavioral instructions unless clients truly require different execution.

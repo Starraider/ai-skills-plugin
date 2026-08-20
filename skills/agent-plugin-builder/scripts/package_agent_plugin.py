@@ -116,7 +116,7 @@ def package_files(root: Path, selected_roots: Iterable[Path]) -> list[Path]:
             relative = path.relative_to(root)
             if any(part in MAINTAINER_PARTS for part in relative.parts):
                 continue
-            if path.name in MAINTAINER_NAMES or path.suffix in MAINTAINER_SUFFIXES:
+            if path.name in {".DS_Store"} or (path.name == "AGENTS.md" and relative == Path("AGENTS.md")) or path.suffix in MAINTAINER_SUFFIXES:
                 continue
             if path.is_symlink():
                 raise ValueError(f"refusing to package symlink: {relative}")
