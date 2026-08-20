@@ -1,6 +1,7 @@
 ---
 name: new-agents-md
 description: Use when the user wants to create, replace, or improve an AGENTS.md instruction file for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Establish the target product and scope, inspect the repository for evidence, create concise project-specific guidance, and give target-appropriate discovery checks. Do not use for skills, native rules, custom agents, or generic prompts unless an AGENTS.md is explicitly needed.
+license: CC-BY-4.0
 ---
 
 # New AGENTS.md

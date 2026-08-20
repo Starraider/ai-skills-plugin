@@ -1,6 +1,7 @@
 ---
 name: new-hook
 description: Use when deciding whether a lifecycle or event hook is the right solution, or when creating or revising one for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Select exactly one target and documented event model; recommend a Skill, plugin/app, permission policy, task, automation, or CI when a hook is unsupported or unsuitable.
+license: CC-BY-4.0
 ---
 
 # New Hook

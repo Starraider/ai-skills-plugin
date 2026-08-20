@@ -1,6 +1,7 @@
 ---
 name: new-agent
 description: Use when the user wants to create a specialized agent for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. Require the target product and the agent's specific capabilities, then create the smallest supported agent definition and give product-appropriate verification steps. Do not treat skills, rules, or generic prompts as agents unless the selected product documents that model.
+license: CC-BY-4.0
 ---
 
 # New Agent

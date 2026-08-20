@@ -64,4 +64,6 @@ The product-specific formats were checked on 2026-08-19 against current document
 
 ## License
 
-No standalone license is declared for this skill directory. Before external distribution, apply the license required by the containing repository.
+Licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).

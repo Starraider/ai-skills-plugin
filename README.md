@@ -347,3 +347,10 @@ python3 skills/agent-plugin-builder/scripts/package_agent_plugin.py . \
 ## Standard boundary
 
 Agent Plugins 1.0.0 standardizes the root manifest, Agent Skills, and optional MCP configuration. Client installation, permissions, enablement, and UI remain client-managed.
+
+## License
+
+This project and all contained Agent Skills are licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).
+

@@ -89,4 +89,6 @@ None required.
 
 ## License
 
-No standalone license is declared for this skill directory. Before external distribution, add or document the license required by the containing repository.
+Licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](../../LICENSE).
+
+Copyright (c) 2026 Sven Kalbhenn ([https://www.skom.de](https://www.skom.de)).

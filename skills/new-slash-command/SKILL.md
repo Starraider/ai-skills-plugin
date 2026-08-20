@@ -1,6 +1,7 @@
 ---
 name: new-slash-command
 description: Use when deciding whether a reusable task should be a slash command and when creating or revising a target-native command or the documented alternative for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca.
+license: CC-BY-4.0
 ---
 
 # New Slash Command

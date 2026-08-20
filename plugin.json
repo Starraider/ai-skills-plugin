@@ -2,6 +2,12 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-skills-plugin",
   "description": "Portable Agent Skills for AI-harness diagnosis, AGENTS.md guidance, prompt design, IDE-native agents, hooks, slash commands, workflow creation, skill authoring, and Agent Plugin creation.",
+  "license": "CC-BY-4.0",
+  "author": {
+    "name": "Sven Kalbhenn",
+    "url": "https://www.skom.de"
+  },
+  "homepage": "https://www.skom.de",
   "keywords": [
     "agent-skills",
     "agent-plugins",

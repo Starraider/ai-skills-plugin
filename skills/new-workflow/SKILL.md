@@ -1,6 +1,7 @@
 ---
 name: new-workflow
 description: Use when deciding whether a repeatable workflow is appropriate and when creating or revising a target-native workflow for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca.
+license: CC-BY-4.0
 ---
 
 # New Workflow

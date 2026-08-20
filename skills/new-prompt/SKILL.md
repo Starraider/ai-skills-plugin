@@ -1,6 +1,7 @@
 ---
 name: new-prompt
 description: Create or improve a ready-to-use LLM prompt from a user's goal. Use when the user asks to write, optimize, structure, debug, evaluate, or template a prompt for a general-purpose or reasoning language model, including prompts for code, data, summaries, instructions, creative work, evaluations, or tool use. Do not use for Stitch-specific UI prompts; route those to an installed Stitch-focused Skill.
+license: CC-BY-4.0
 ---
 
 # New Prompt

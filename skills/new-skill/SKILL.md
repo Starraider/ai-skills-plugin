@@ -1,6 +1,7 @@
 ---
 name: new-skill
 description: Use when creating, improving, validating, or packaging an Agent Skill. Covers standards-compliant SKILL.md authoring, bundled and standalone documentation, progressive disclosure, scripts, templates, and evaluation.
+license: CC-BY-4.0
 ---
 
 # New Skill

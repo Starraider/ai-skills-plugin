@@ -3,6 +3,7 @@
   "evals": [
     {
       "id": 1,
+      "kind": "representative",
       "prompt": "Create /review-api in OpenCode for this project. It should review the current diff for API breaking changes, accept an optional focus area, and never edit files.",
       "expected_output": "A project-scoped OpenCode Markdown command plus invocation and a read-only smoke test.",
       "files": [],
@@ -14,6 +15,7 @@
     },
     {
       "id": 2,
+      "kind": "edge-case",
       "prompt": "I need /deploy-preview in Codex. Create it and make sure it deploys automatically after the tests pass.",
       "expected_output": "An explicit Codex Skill recommendation and artifact, or a clear explanation that literal custom slash commands are unavailable.",
       "files": [],
@@ -25,6 +27,7 @@
     },
     {
       "id": 3,
+      "kind": "near-miss",
       "prompt": "Set up a ChatGPT slash command that posts a weekly revenue summary to Slack every Monday without asking anyone.",
       "expected_output": "A safe alternative recommendation rather than a fabricated ChatGPT slash-command artifact.",
       "files": [],

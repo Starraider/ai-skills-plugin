@@ -1,6 +1,7 @@
 ---
 name: improve-my-ai-harness
 description: Diagnose how to improve an AI coding IDE or agent harness by interviewing the user, identifying required capabilities, selecting a prompt, AGENTS.md, Agent Skill, slash command, workflow, hook, specialized agent, Agent Plugin, or a justified combination, and producing a paste-ready implementation prompt that invokes this plugin's relevant builder skills. Use when the desired harness improvement or mechanism is unclear; do not use when the artifact is already chosen and the user wants direct implementation.
+license: CC-BY-4.0
 ---
 
 # Improve My AI Harness
