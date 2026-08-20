@@ -83,10 +83,6 @@ layout. See [Antigravity’s plugin documentation](https://antigravity.google/do
 5. Describe a matching task, or ask the agent to use one of the installed
    skills to verify discovery.
 
-**Marketplace route:** Antigravity’s Customizations page installs Google-built
-bundled plugins. This package is not currently listed there, so use the manual
-route above.
-
 ### Codex
 
 Codex supports reusable plugins through the shared Plugin Directory, but the
@@ -122,12 +118,6 @@ syntax in [Build skills](https://developers.openai.com/codex/skills).
    a newly added skill fails to appear. If an administrator disables a local
    skill in `~/.codex/config.toml`, re-enable it there and restart Codex.
 
-**Plugin Directory / marketplace route:** If this package is published as an
-OpenAI plugin, install it from the Plugin Directory and follow any connection
-prompt. In a managed workspace, an administrator must enable Plugins for the
-role and make the plugin Available or Installed. This repository is not itself
-a listed Plugin Directory entry, so there is no marketplace install button for
-it today. See [Plugins in ChatGPT and Codex](https://help.openai.com/en/articles/20001256-plugins-in-chatgpt-and-codex).
 
 ### ChatGPT Desktop App
 
@@ -155,7 +145,6 @@ The ChatGPT Desktop App (on macOS and Windows) installs standalone Agent Skills 
 3. Upload each skill archive or directory and complete the safety review if the desktop app marks it **Needs Review**. A blocked upload cannot be used.
 4. Use `@` in a desktop chat session to select an installed skill, or send a request that matches its description. There is no client restart; the skill is available when the ChatGPT Desktop App finishes scanning it. Note that skills installed in the desktop app do not automatically sync across web or mobile surfaces and are managed locally within the desktop application.
 
-**Plugin Directory / marketplace route:** A published version can be installed from the Plugin Directory in the ChatGPT Desktop App after reviewing its included skills and any required apps. Workspace administrators may need to enable the plugin for the user’s role. This repository is not currently published there, so manual skill upload via the desktop app is the applicable route.
 
 ### Zed
 
@@ -183,10 +172,6 @@ and trust model.
    skills appear. Type `/` or `@skill` in an agent message to invoke one.
 4. Zed live-reloads additions and edits to skills, so no restart is required.
 
-**Marketplace/import route:** Zed can import a single GitHub-hosted Markdown
-skill and can use skills from skills.sh, but this repository is not a Zed
-marketplace item. Prefer the manual directory copy so that scripts and
-references travel with each skill.
 
 ### OpenCode
 
@@ -234,9 +219,7 @@ format, [OpenCode plugins](https://opencode.ai/v2/docs/build/plugins).
    change; restart OpenCode after changing the configuration or if discovery
    does not refresh.
 
-**Marketplace route:** There is no applicable npm/plugin marketplace install
-for this package. Do not place its root `plugin.json` in `.opencode/plugins/`:
-that directory expects a JavaScript or TypeScript OpenCode plugin entrypoint.
+> **Note:** Do not place this package's root `plugin.json` in `.opencode/plugins/` — that directory expects a JavaScript or TypeScript OpenCode plugin entrypoint, not an Agent Plugins 1.0.0 package.
 
 ### Qoder
 
@@ -266,12 +249,171 @@ required. Refer to [Qoder Skills](https://docs.qoder.com/extensions/skills) and
    or `/agent-plugin-builder`, or let Qoder match it automatically from its
    description.
 
-**Plugin marketplace/import route:** This repository is not currently listed
-in Qoder Marketplace. Qoder’s **Plugins** settings can import a local plugin
-folder and its native manifest is optional, but a Qoder-specific package should
-use `.qoder-plugin/plugin.json` for stable metadata. Do not move or rename this
-package’s portable root `plugin.json` just for Qoder; use the skill route above
-unless a Qoder adapter is intentionally maintained.
+### Cursor
+
+Cursor is bundle-aware and loads this repository as a complete Agent Plugins
+1.0.0 package. It distinguishes between portable Agent Plugins (root
+`plugin.json`) and Cursor-native plugins (`.cursor-plugin/plugin.json`); this
+repository is a portable package. See [Cursor Plugins
+documentation](https://cursor.com/docs/plugins).
+
+1. Copy or symlink the whole `ai-skills-plugin` directory to the local plugins
+   folder:
+
+   ```text
+   ~/.cursor/plugins/local/ai-skills-plugin/   # macOS / Linux
+   %USERPROFILE%\.cursor\plugins\local\ai-skills-plugin\   # Windows
+   ```
+
+   ```bash
+   mkdir -p ~/.cursor/plugins/local
+   ln -s "$PLUGIN_DIR" ~/.cursor/plugins/local/ai-skills-plugin
+   ```
+
+2. Reload the window to trigger discovery: open the Command Palette
+   (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Developer: Reload Window**, or
+   restart Cursor. Hot-reload is not supported for local plugins.
+3. Open **Customize** in the sidebar (or **Settings → Plugins**) and confirm
+   that `ai-skills-plugin` appears under **Installed**.
+
+
+### GitHub Copilot and VS Code
+
+GitHub Copilot and VS Code share the same plugin loading mechanism. The
+reliable local-development route registers the plugin directory in VS Code's
+`settings.json`. See [GitHub Copilot Agent Plugins
+documentation](https://docs.github.com/en/copilot/using-github-copilot/using-agent-plugins)
+and [VS Code chat plugin settings](https://code.visualstudio.com/docs/copilot/agent-plugins).
+
+1. Open VS Code's `settings.json` (Command Palette → **Preferences: Open User
+   Settings (JSON)**) and add the plugin path:
+
+   ```json
+   "chat.plugins.enabled": true,
+   "chat.pluginLocations": {
+     "/absolute/path/to/ai-skills-plugin": true
+   }
+   ```
+
+   Replace `/absolute/path/to/ai-skills-plugin` with `$PLUGIN_DIR`'s value.
+
+2. Reload VS Code (**Developer: Reload Window**). Copilot reads
+   `chat.pluginLocations` on startup; changes require a reload.
+3. Verify in the Chat view: click the gear icon → **Configure Skills** and
+   confirm the nine skills appear. Any `mcp.json` servers (this package has
+   none) would appear in the MCP server list.
+
+
+**Enterprise note:** Workspace and enterprise administrators can restrict
+available plugins with the `chat.plugins.paths` policy or via
+`enabledPlugins` / `strictKnownMarketplaces` managed settings. Confirm that
+local plugin paths are allowed in managed environments before using this route.
+
+### Windsurf
+
+Windsurf's Cascade agent discovers skills from standard `.agents/skills/`
+paths and from explicit entries in the project-level `.windsurf/skills.json`.
+MCP servers are managed separately via `~/.codeium/windsurf/mcp_config.json`
+(this package has none). See [Windsurf documentation](https://docs.codeium.com/windsurf).
+
+**Option A — Standard discovery path (recommended):**
+
+1. Copy the nine skill directories to the project or global discovery path:
+
+   ```text
+   <project>/.agents/skills/<skill-name>/          # project-local
+   ~/.agents/skills/<skill-name>/                  # global
+   ```
+
+   ```bash
+   mkdir -p .agents/skills
+   cp -R "$PLUGIN_DIR"/skills/* .agents/skills/
+   ```
+
+2. Open or reopen the project in Windsurf. Cascade picks up new skills from
+   watched directories without an IDE restart.
+
+**Option B — Explicit `skills.json` reference:**
+
+Add the plugin's skills directory to `.windsurf/skills.json` so the path
+travels with the repository:
+
+```json
+{
+  "skills": ["/absolute/path/to/ai-skills-plugin/skills"]
+}
+```
+
+Windsurf reloads this file when it changes; a full restart is not required.
+
+### Kiro
+
+Kiro calls Agent Plugins **"Powers"** and supports importing a local folder
+containing a `plugin.json` directly through its Powers panel. Manual skill
+directory placement also works. See [Kiro Powers
+documentation](https://kiro.dev/docs/powers).
+
+**GUI route (recommended):**
+
+1. Open the **Powers panel** in Kiro (click the ghost-with-lightning-bolt
+   icon in the activity bar).
+2. Select **Add Custom Power → Import power from a folder**.
+3. Choose the `ai-skills-plugin` root directory (the folder that contains
+   `plugin.json`).
+4. Click **Install**. Kiro reads the `plugin.json`, discovers all skills under
+   `skills/`, and activates them immediately.
+
+**Manual skill route:**
+
+```text
+<workspace>/.kiro/skills/<skill-name>/   # workspace-specific
+~/.kiro/skills/<skill-name>/             # global
+```
+
+```bash
+mkdir -p .kiro/skills
+cp -R "$PLUGIN_DIR"/skills/* .kiro/skills/
+```
+
+
+**Note:** Kiro also supports a legacy `POWER.md` format; the `plugin.json`
+route is recommended for new installations.
+
+### Google Agents CLI
+
+The Google Agents CLI (`agents-cli`) consumes Agent Plugins 1.0.0 packages
+as skill bundles that teach the CLI's built-in coding assistant how to perform
+ADK (Agent Development Kit) lifecycle tasks. This package's skills are
+independent of the ADK but load through the same mechanism.
+
+**Prerequisites:** Python 3.11+, Node.js, and `uv`.
+
+1. Install and set up the CLI (one-time):
+
+   ```bash
+   uvx google-agents-cli setup
+   ```
+
+2. Register this package's skills globally via the `npx skills add` command:
+
+   ```bash
+   npx skills add /absolute/path/to/ai-skills-plugin --global
+   ```
+
+   Or, for a project-local install, run from the project directory without
+   `--global`:
+
+   ```bash
+   npx skills add /absolute/path/to/ai-skills-plugin
+   ```
+
+3. Confirm that the skills are visible inside the agents CLI's coding-assistant
+   context. No CLI restart is required; skills are discovered at session start.
+
+**Note:** The `agents-cli` does not provide a universal `agents-cli install`
+command for arbitrary Agent Plugins packages. Discovery is handled by the
+`npx skills add` pathway above, which registers the `skills/` directory from
+the package.
 
 ### Orca
 
@@ -298,13 +440,6 @@ describes the `npx skills add` workflow used for published repositories.
 3. Orca documents background skill updates but does not require an IDE restart
    after a manual skill copy. Reopen the workspace or begin a new task if the
    current agent session does not refresh its catalog.
-
-**Registry / marketplace route:** Orca’s public registry is installed with
-`npx skills add` and requires a published repository plus a selected skill, for
-example `npx skills add <repository-url> --skill new-prompt --global`. This
-repository is not currently registered as an Orca install package, so use the
-manual route. Orca does not document a separate external-plugin marketplace
-format that can consume this root `plugin.json` directly.
 
 ### Verify the portable package before sharing
 

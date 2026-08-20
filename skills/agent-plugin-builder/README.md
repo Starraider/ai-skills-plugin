@@ -31,17 +31,45 @@ Provide the desired capability or an existing plugin directory, the intended out
 
 ## Installation
 
-Inside any Agent Plugins 1.0.0 package, install this skill at the standard discovery path:
+This skill ships as part of the `ai-skills-plugin` Agent Plugins 1.0.0
+package. Full per-client instructions are in the [package README](../../README.md).
+Quick reference:
+
+| Client | Install method | Skill discovery path |
+|---|---|---|
+| **Antigravity** | Copy/symlink plugin dir to `.agents/plugins/ai-skills-plugin/` or `~/.gemini/config/plugins/ai-skills-plugin/` | `skills/<skill-name>/SKILL.md` |
+| **Cursor** | Copy/symlink plugin dir to `~/.cursor/plugins/local/ai-skills-plugin/`, then reload window | Auto-discovered from `plugin.json` |
+| **GitHub Copilot / VS Code** | Add `"chat.pluginLocations": { "/path/to/ai-skills-plugin": true }` to `settings.json`, reload window | `skills/<skill-name>/SKILL.md` via `chat.pluginLocations` |
+| **Kiro** | Powers panel → **Add Custom Power → Import power from a folder** → select plugin root | Auto-discovered from `plugin.json` |
+| **Windsurf** | Copy skills to `.agents/skills/` or add path to `.windsurf/skills.json` | `.agents/skills/<skill-name>/SKILL.md` |
+| **Codex** | Copy skills to `.agents/skills/<skill-name>/` in project or `~/.agents/skills/` | `SKILL.md` in each skill dir |
+| **ChatGPT Desktop App** | Upload each `skills/<skill-name>/` directory via **Plugins → Skills → Create → Upload from your computer** | Per-skill upload |
+| **OpenCode** | Copy skills to `.opencode/skills/` or `.agents/skills/`; or add `"skills": ["/path/to/.../skills"]` to `opencode.json` | `.opencode/skills/<skill-name>/SKILL.md` |
+| **Qoder** | Copy skills to `.qoder/skills/<skill-name>/` or `~/.qoder/skills/<skill-name>/` | `.qoder/skills/<skill-name>/SKILL.md` |
+| **Google Agents CLI** | `npx skills add /path/to/ai-skills-plugin [--global]` | Standard skills path |
+| **Orca** | Copy skills to `.agents/skills/<skill-name>/` or `~/.agents/skills/<skill-name>/` | `.agents/skills/<skill-name>/SKILL.md` |
+| **Zed** | Copy skills to `.agents/skills/<skill-name>/` or `~/.agents/skills/<skill-name>/`; grant workspace trust | `.agents/skills/<skill-name>/SKILL.md` |
+
+Inside any Agent Plugins 1.0.0 package, this skill must be at the standard
+discovery path:
 
 ```text
 <plugin-root>/skills/agent-plugin-builder/
 ```
 
-The directory must contain `SKILL.md` directly beneath it. A skills-capable Agent Plugins client discovers it as an immediate child of `skills/`; the standard intentionally leaves client installation and enablement UX unspecified.
+The directory must contain `SKILL.md` directly beneath it. A skills-capable
+Agent Plugins client discovers it as an immediate child of `skills/`; the
+standard intentionally leaves client installation and enablement UX unspecified.
 
-For the ChatGPT Desktop App, which does not load local filesystem Agent Plugins packages directly, install this skill through the Skill installation flow: upload the complete `skills/agent-plugin-builder/` directory (with all supporting scripts and references) via **Plugins → Skills → Create → Upload from your computer**.
+For the **ChatGPT Desktop App**, which does not load local filesystem Agent
+Plugins packages directly, install this skill through the Skill installation
+flow: upload the complete `skills/agent-plugin-builder/` directory (with all
+supporting scripts and references) via **Plugins → Skills → Create → Upload
+from your computer**.
 
-For standalone development in this repository, use the `skills/agent-plugin-builder/` directory as the skill source.
+For standalone development in this repository, use the
+`skills/agent-plugin-builder/` directory as the skill source.
+
 
 ## Example prompts
 
