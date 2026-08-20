@@ -1,6 +1,6 @@
 ---
 name: new-slash-command
-description: Use when deciding whether a reusable task should be a slash command and when creating or revising a target-native command or the documented alternative for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca.
+description: Use when deciding whether a reusable task should be a slash command and when creating or revising a target-native command or the documented alternative for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI (Gemini CLI).
 license: CC-BY-4.0
 ---
 
@@ -45,6 +45,11 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
    - **OpenCode:** create a native Markdown custom command.
    - **Qoder:** create a native Markdown custom command.
    - **Orca:** create a Quick Command for a terminal command or launch-time agent prompt. If a slash command is required, create it in the hosted CLI agent using that agent's own documented extension model; Orca itself has no documented custom agent slash-command artifact.
+   - **Cursor:** create a Markdown file in `.cursor/commands/` (project) or `~/.cursor/commands/` (global); the filename becomes `/name` in the Cursor Chat and Agent panel.
+   - **GitHub Copilot / VS Code:** create a `.prompt.md` file in `.github/prompts/` (workspace) or the VS Code user profile (global); the filename stem becomes `/name` in Copilot Chat. Use optional YAML frontmatter (`description`, `agent`, `tools`) to configure behavior.
+   - **Windsurf:** create a Markdown Workflow in `.windsurf/workflows/` (project) or the Windsurf global workflows directory; the filename becomes `/name` in the Cascade chat.
+   - **Kiro:** create a Markdown steering file in `.kiro/steering/` (workspace) or `~/.kiro/steering/` (global) with frontmatter `inclusion: manual`; the filename stem becomes `/name` in the Kiro agent chat. Kiro has no separate commands directory—manual steering files are the native slash-command model.
+   - **Google Agents CLI (Gemini CLI):** create a TOML file in `.gemini/commands/` (project) or `~/.gemini/commands/` (global) with a `prompt` field and optional `description`; the filename (or `subdirectory/filename`) becomes `/name` (or `/subdir:name`). Use `{{args}}` for arguments. Run `/commands reload` to pick up changes without restarting.
 
    Completion: one current, documented target representation and scope are selected. For unsupported literal slash commands, state that limitation and use only the named alternative.
 
@@ -76,3 +81,8 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
 - [Portable explicit Skill template for Codex, ChatGPT, and Zed](templates/explicit-skill.md)
 - [OpenCode command template](templates/opencode-command.md)
 - [Qoder command template](templates/qoder-command.md)
+- [Cursor command template](templates/cursor-command.md)
+- [GitHub Copilot / VS Code prompt file template](templates/copilot-prompt.md)
+- [Windsurf workflow template](templates/windsurf-workflow.md)
+- [Kiro manual steering file template](templates/kiro-steering.md)
+- [Google Agents CLI (Gemini CLI) TOML command template](templates/gemini-cli-command.toml)

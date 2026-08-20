@@ -1,0 +1,9 @@
+description = "{{ONE_LINE_COMMAND_DESCRIPTION}}"
+
+prompt = """
+{{COMMAND_PROMPT}}
+
+Inputs: {{args}}
+
+Before {{IRREVERSIBLE_OR_AMBIGUOUS_ACTION}}, explain the impact and ask for explicit approval.
+"""
