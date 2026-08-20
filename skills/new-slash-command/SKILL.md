@@ -49,7 +49,7 @@ Create one safe, target-native, manually invoked shortcut for a repeated task—
    - **GitHub Copilot / VS Code:** create a `.prompt.md` file in `.github/prompts/` (workspace) or the VS Code user profile (global); the filename stem becomes `/name` in Copilot Chat. Use optional YAML frontmatter (`description`, `agent`, `tools`) to configure behavior.
    - **Windsurf:** create a Markdown Workflow in `.windsurf/workflows/` (project) or the Windsurf global workflows directory; the filename becomes `/name` in the Cascade chat.
    - **Kiro:** create a Markdown steering file in `.kiro/steering/` (workspace) or `~/.kiro/steering/` (global) with frontmatter `inclusion: manual`; the filename stem becomes `/name` in the Kiro agent chat. Kiro has no separate commands directory—manual steering files are the native slash-command model.
-   - **Google Agents CLI (Gemini CLI):** create a TOML file in `.gemini/commands/` (project) or `~/.gemini/commands/` (global) with a `prompt` field and optional `description`; the filename (or `subdirectory/filename`) becomes `/name` (or `/subdir:name`). Use `{{args}}` for arguments. Run `/commands reload` to pick up changes without restarting.
+   - **Google Agents CLI (Gemini CLI):** create a TOML file in `.gemini/commands/` (project) or `~/.gemini/commands/` (global) with a `prompt` field and optional `description`; the filename (or `subdirectory/filename`) becomes `/name` (or `/subdir:name`). Use argument placeholders (`{args}`). Run `/commands reload` to pick up changes without restarting.
 
    Completion: one current, documented target representation and scope are selected. For unsupported literal slash commands, state that limitation and use only the named alternative.
 

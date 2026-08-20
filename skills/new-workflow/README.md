@@ -1,6 +1,6 @@
 # new-workflow
 
-`new-workflow` decides whether a repeatable workflow is useful and creates the smallest documented representation for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca.
+`new-workflow` decides whether a repeatable workflow is useful and creates the smallest documented representation for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI.
 
 ## What this skill solves
 
@@ -8,7 +8,7 @@
 
 ## Use when
 
-- Turning a recurring process—such as triaging issues, preparing releases, reviewing pull requests, or producing a report—into a safe, reusable procedure.
+- Turning a recurring process—such as triaging issues, preparing releases, reviewing pull requests, scaffolding features, or producing a report—into a safe, reusable procedure.
 - Choosing between an explicit workflow, Skill, slash command, agent, hook, scheduled automation, or CI job for one supported product.
 - Creating, revising, or debugging a target-native workflow and its discovery/trigger behavior.
 
@@ -27,7 +27,22 @@ Provide the target product, the recurring outcome, how it starts, desired inputs
 
 ## Installation
 
-Keep the complete `new-workflow/` directory together. In this repository it is available at `skills/new-workflow/`; see the repository’s [installation guidance](../../README.md#install-in-supported-ides-and-agents) for client-specific installation.
+This is a portable Agent Skill. Keep its complete directory together when installing it.
+
+| Client | Project installation | User installation |
+| --- | --- | --- |
+| Antigravity | `.agents/skills/new-workflow/` | `~/.gemini/config/skills/new-workflow/` |
+| Codex | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| Zed | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| OpenCode | `.opencode/skills/new-workflow/` or `.agents/skills/new-workflow/` | `~/.config/opencode/skills/new-workflow/` |
+| Qoder | `.qoder/skills/new-workflow/` | `~/.qoder/skills/new-workflow/` |
+| Orca | Install as a compatible Agent Skill for the launched agent | Install in that agent's global Skills location |
+| ChatGPT Desktop App | Upload through Plugins → Skills in the desktop app | Install through the desktop app Skills UI |
+| Cursor | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| GitHub Copilot / VS Code | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| Windsurf | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| Kiro | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
+| Google Agents CLI (Gemini CLI) | `.agents/skills/new-workflow/` | `~/.agents/skills/new-workflow/` |
 
 ## Example prompts
 
@@ -37,27 +52,34 @@ Keep the complete `new-workflow/` directory together. In this repository it is a
 - “In **Zed**, create an explicit `/deploy-preview` procedure that requests approval before it runs any command or external write.”
 - “Build a **Qoder** Dynamic workflow for three agents to investigate a flaky test, compare evidence, and stop for a maintainer before any code is changed.”
 - “Set up an **Orca** recurring workflow to inspect open pull requests every weekday, but draft the automation first and do not enable it.”
+- “Create a **Cursor** project command workflow `/refactor-module` in `.cursor/commands/` that inspects dependencies, plans changes, and requires approval before writing files.”
+- “Add a **GitHub Copilot** agentic prompt workflow `/generate-pr-description` in `.github/prompts/` with `agent: agent` and codebase search tools.”
+- “Create a **Windsurf** workflow `/scaffold-api-endpoint` in `.windsurf/workflows/` that creates schema, route, and test files sequentially.”
+- “Define a **Kiro** manual steering workflow `/security-audit` in `.kiro/steering/` with `inclusion: manual` that reviews code against OWASP guidelines.”
+- “Scaffold a **Google Agents CLI** ADK workflow `daily-log-analyzer` that fetches Cloud Run logs, summarizes error clusters, and deploys to Cloud Run with human approval gates.”
 
 ## Validation
 
-Validate the portable skill structure from the repository root:
+From the repository root, validate the portable structure:
 
 ```bash
 skills/new-skill/scripts/validate-skill.sh skills/new-workflow \
-  --clients codex,antigravity,opencode,qoder
+  --clients codex,antigravity,opencode,qoder,cursor,copilot,windsurf,kiro,google-agents-cli
+python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
 ```
 
-Then complete the selected product’s discovery and low-risk execution check in [target workflow formats and research](references/target-workflow-formats.md). The included eval cases cover a representative workflow, an unsuitable-workflow decision, and a safety boundary.
+Then complete the selected product’s discovery and low-risk execution check in [target workflow formats and research](references/target-workflow-formats.md). The included eval cases cover representative workflows, unsuitable-workflow decisions, and safety boundaries.
 
 ## Sources
 
-The target formats were researched on 2026-08-19 against primary documentation: [Antigravity Workflows](https://antigravity.google/docs/ide/workflows?app=antigravity-ide), [ChatGPT Workspace Agents](https://help.openai.com/en/articles/20001143/), [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-tasks-inchatgpt), [Zed Skills](https://zed.dev/docs/ai/skills), [OpenCode Commands](https://opencode.ai/docs/commands/), [Qoder Commands](https://docs.qoder.com/cli/commands), [Qoder Working Modes](https://docs.qoder.com/cli/working-modes), and [Orca CLI overview](https://www.onorca.dev/docs/cli/overview). Codex uses the Workspace Agents plugin for eligible workspaces; otherwise its documented reusable-procedure primitive is an Agent Skill.
+The target formats were researched on 2026-08-20 against primary documentation: [Antigravity Workflows](https://antigravity.google/docs/ide/workflows?app=antigravity-ide), [ChatGPT Workspace Agents](https://help.openai.com/en/articles/20001143/), [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-tasks-inchatgpt), [Skills in ChatGPT](https://help.openai.com/en/articles/20001066), [Zed Skills](https://zed.dev/docs/ai/skills), [OpenCode Commands](https://opencode.ai/docs/commands/), [Qoder Commands](https://docs.qoder.com/cli/commands), [Qoder Working Modes](https://docs.qoder.com/cli/working-modes), [Orca CLI overview](https://www.onorca.dev/docs/cli/overview), [Cursor Custom Commands](https://www.cursor.com/chat/commands), [Cursor Agent Skills](https://cursor.com/docs/skills), [GitHub Copilot Prompt Files](https://code.visualstudio.com/docs/copilot/copilot-customization#_prompt-files), [Windsurf Workflows](https://docs.windsurf.com/windsurf/customization), [Kiro Steering](https://kiro.dev/docs/steering/), [Kiro Custom Agents](https://kiro.dev/docs/agents/custom-agents), [google-agents-cli](https://github.com/google/agents-cli), [ADK documentation](https://google.github.io/adk-docs/), and [Gemini CLI Custom Commands](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/commands.md).
 
 ## Related skills
 
 - [`new-skill`](../new-skill/README.md) for reusable, context-dependent agent instructions.
 - [`new-agent`](../new-agent/README.md) for a long-lived specialist with a tool boundary.
 - [`new-hook`](../new-hook/README.md) for deterministic lifecycle reactions rather than an ordered workflow.
+- [`new-slash-command`](../new-slash-command/README.md) for compact, manually invoked prompt shortcuts.
 
 ## License
 

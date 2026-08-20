@@ -38,6 +38,44 @@
         "Production deployment is not enabled without explicit user authorization",
         "The plan has a human review/approval step independent of the agents"
       ]
+    },
+    {
+      "id": 4,
+      "kind": "representative",
+      "prompt": "Create a Windsurf project workflow called scaffold-endpoint that creates route, schema, and test files for a new resource and stops before committing.",
+      "expected_output": "A project-scoped Windsurf Markdown workflow in .windsurf/workflows/scaffold-endpoint.md with sequential steps and an approval gate.",
+      "files": [],
+      "expectations": [
+        "The artifact path is .windsurf/workflows/scaffold-endpoint.md",
+        "The workflow uses sequential steps and includes preconditions/inputs",
+        "It does not automatically commit changes without explicit user confirmation",
+        "Verification includes checking Cascade / autocomplete and running a non-destructive test"
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "representative",
+      "prompt": "Create a GitHub Copilot workspace workflow named review-pr that uses multi-step agent mode and codebase search tools to produce a review checklist.",
+      "expected_output": "A project-scoped .github/prompts/review-pr.prompt.md file with agent: agent frontmatter and structured workflow instructions.",
+      "files": [],
+      "expectations": [
+        "The artifact path is .github/prompts/review-pr.prompt.md",
+        "Frontmatter includes agent: agent and tools configuration",
+        "The body contains structured review instructions and an output format",
+        "Verification instructs checking Copilot Chat / autocomplete with chat.promptFiles enabled"
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "representative",
+      "prompt": "Design a Google Agents CLI ADK workflow specification for weekly-error-digest that fetches Cloud Run error logs, clusters anomalies, and prepares a report.",
+      "expected_output": "A design specification artifact for an ADK-based multi-step agent workflow with scaffold and evaluation commands.",
+      "files": [],
+      "expectations": [
+        "Distinguishes an ADK Python workflow project from a simple Gemini CLI prompt command",
+        "Specifies inputs, multi-step pipeline, tools, model, and human approval boundary",
+        "Provides agents-cli create, eval, run, and deploy instructions"
+      ]
     }
   ]
 }

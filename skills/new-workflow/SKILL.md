@@ -1,6 +1,6 @@
 ---
 name: new-workflow
-description: Use when deciding whether a repeatable workflow is appropriate and when creating or revising a target-native workflow for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca.
+description: Use when deciding whether a repeatable workflow is appropriate and when creating or revising a target-native workflow for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, Orca, Cursor, GitHub Copilot / VS Code, Windsurf, Kiro, or Google Agents CLI.
 license: CC-BY-4.0
 ---
 
@@ -45,6 +45,11 @@ Create one focused, repeatable workflow in the selected product's documented for
    - **OpenCode:** create a Markdown custom command for a manually invoked prompt workflow. Use a skill or agent instead when the procedure needs conditional resources or a specialist tool boundary.
    - **Qoder:** create a Markdown custom command for a single-agent reusable procedure. Use Dynamic workflows from `/workflows` only for actual multi-agent decomposition and orchestration.
    - **Orca:** use Scheduled Automations for recurring prompts, or Orca Orchestration for a supervised multi-agent task graph. There is no generic local workflow file; load the version-matched Orca guide before mutating Orca state.
+   - **Cursor:** create a Markdown command in `.cursor/commands/<name>.md` (project) or `~/.cursor/commands/<name>.md` (global) invoked as `/name`, or an explicit Agent Skill in `.cursor/skills/<name>/SKILL.md` (`disable-model-invocation: true`). For persistent rules use `.cursor/rules/<name>.mdc` (not a workflow); for UI chat personas use a Custom Mode.
+   - **GitHub Copilot / VS Code:** create a `.prompt.md` file in `.github/prompts/<name>.prompt.md` (workspace) or user profile (global) with `agent: "agent"` and `tools: [...]` for multi-step agentic execution, invoked as `/name` in Copilot Chat. For CI/automated repository-wide workflows, use GitHub Actions (`.github/workflows/`).
+   - **Windsurf:** create a native Markdown Workflow in `.windsurf/workflows/<name>.md` (project) or via **Customizations → Workflows**, invoked as `/name` in Cascade chat. Steps execute sequentially and can chain sub-workflows with "Call /sub-workflow". For persistent project rules, use `.windsurfrules`.
+   - **Kiro:** create a manual steering workflow in `.kiro/steering/<name>.md` with frontmatter `inclusion: manual` (invoked as `/name`), or create a Custom Agent in `.kiro/agents/<name>.json` / `.kiro/agents/<name>.md` for tool-governed multi-step workflows. For event-triggered workflows, use `.kiro/hooks/`.
+   - **Google Agents CLI (and Gemini CLI):** for an ADK-based multi-step agent workflow, create a design specification (`DESIGN_SPEC.md`) and scaffold with `agents-cli create <name>`, implementing `agent.py` and verifying with `agents-cli eval` before `agents-cli deploy`. For Gemini CLI prompt workflows, create a TOML command in `.gemini/commands/<name>.toml` (invoked as `/name`) using argument placeholders (`{args}`).
 
    Completion: one target-native representation and one scope are selected. The output names any availability or plan restriction instead of fabricating configuration.
 
@@ -52,7 +57,7 @@ Create one focused, repeatable workflow in the selected product's documented for
 
    Give it an action-oriented name and a description that names its trigger, inputs, and deliverable. Write a short, ordered procedure that states prerequisites, input validation, evidence to inspect, each consequential action, the expected output, verification, and stop/escalation conditions. Parameterize genuinely variable inputs; never hide destructive defaults inside a reusable prompt.
 
-   Use [the workflow outline](templates/workflow-outline.md) for the instructions/body. Adapt only the target's documented metadata and syntax from the reference. Keep an invocation-only workflow manual unless automatic activation is clearly safe and documented.
+   Use [the workflow outline](templates/workflow-outline.md) or target-specific template in [templates](templates/) for the instructions/body. Adapt only the target's documented metadata and syntax from the reference. Keep an invocation-only workflow manual unless automatic activation is clearly safe and documented.
 
    Completion: a new operator can tell what starts the workflow, what it may do, what success looks like, and when human review is required.
 
@@ -79,4 +84,10 @@ Create one focused, repeatable workflow in the selected product's documented for
 ## Resources
 
 - [Target workflow formats, selection guidance, validation, and primary sources](references/target-workflow-formats.md)
-- [Workflow instruction outline](templates/workflow-outline.md)
+- [Universal workflow instruction outline](templates/workflow-outline.md)
+- [Windsurf native workflow template](templates/windsurf-workflow.md)
+- [GitHub Copilot prompt workflow template](templates/copilot-prompt-workflow.md)
+- [Cursor command workflow template](templates/cursor-workflow.md)
+- [Kiro manual steering workflow template](templates/kiro-steering-workflow.md)
+- [Gemini CLI TOML workflow template](templates/gemini-cli-workflow.toml)
+- [Google Agents CLI / ADK workflow spec template](templates/google-agents-cli-workflow-spec.md)

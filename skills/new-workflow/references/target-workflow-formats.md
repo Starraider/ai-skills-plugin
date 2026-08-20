@@ -1,24 +1,29 @@
 # Target workflow formats and research
 
-Last researched: 2026-08-19. Re-check the linked primary documentation before creating an artifact: workflow capabilities and UI surfaces change quickly.
+Last researched: 2026-08-20. Re-check the linked primary documentation before creating an artifact: workflow capabilities, surfaces, and configuration models change quickly.
 
 ## Selection matrix
 
-| Target | Use for a manual reusable procedure | Use for scheduled / multi-agent work | Do not claim |
+| Target | Use for a manual reusable procedure | Use for scheduled / multi-agent / automated work | Do not claim |
 | --- | --- | --- | --- |
-| Antigravity | Native Markdown Workflow | Use a workflow's explicit steps; choose a hook or task for an actual lifecycle/event reaction | Rules are workflows, or a project file path not documented by the IDE |
-| Codex | Explicit Codex Skill | Eligible Workspace Agent via the Workspace Agents plugin | A separate local Codex workflow file exists |
+| Antigravity | Native Markdown Workflow (`/workflow-name`) | Use explicit workflow steps; choose a hook or task for actual lifecycle/event reaction | Rules are workflows, or an undocumented IDE project file path works |
+| Codex | Explicit Codex Skill (`$skill-name`) | Eligible Workspace Agent via the Workspace Agents plugin | A separate local Codex workflow file format exists |
 | ChatGPT Desktop App | Explicit Agent Skill (`@skill-name`) | Workspace Agent (via web Agent Studio) for scheduled/API triggers; Scheduled Task for recurring prompts | A Task or desktop skill is a local workflow-file format |
-| Zed | Explicit Agent Skill | Use a native agent, external automation, or CI when the work needs a trigger outside an agent request | Zed has a separate native workflow artifact |
-| OpenCode | Markdown custom command | A Skill/agent for rich context; external scheduler/CI for unattended jobs | A custom command grants permissions or is an event trigger |
-| Qoder | Markdown custom command | Dynamic workflow for true multi-agent orchestration; Headless mode/CI for unattended execution | The `/workflows` panel itself creates a custom command |
-| Orca | A worktree task / agent prompt for one run | Scheduled Automation for recurring prompts; Orchestration for supervised multi-agent work | A portable `workflow` file or guessed automation syntax |
+| Zed | Explicit Agent Skill (`/name` or `@skill`) | Use a native agent profile, external ACP agent, automation, or CI | Zed has a separate native workflow artifact |
+| OpenCode | Markdown custom command (`/name`) | A Skill or Agent for rich context; external scheduler or CI for unattended jobs | A custom command grants permissions or is an event trigger |
+| Qoder | Markdown custom command (`/name`) | Dynamic workflow for true multi-agent orchestration; Headless mode/CI for unattended execution | The `/workflows` panel itself creates a custom command |
+| Orca | Worktree task / agent launch prompt for one run | Scheduled Automation for recurring prompts; Orchestration for supervised multi-agent work | A portable `workflow` file or guessed automation syntax |
+| Cursor | Markdown command (`.cursor/commands/` → `/name`) or explicit Skill | Interactive Agent/Composer mode; CI or background tasks for unattended execution | `.cursor/rules/` (`.mdc`) is a workflow execution trigger |
+| GitHub Copilot / VS Code | `.prompt.md` with `agent: "agent"` in `.github/prompts/` → `/name` | Agentic prompt workflow with tools; GitHub Actions (`.github/workflows/`) for CI/scheduled runs | `copilot-instructions.md` is a workflow file or overrides permissions |
+| Windsurf | Native Markdown Workflow (`.windsurf/workflows/` → `/name`) | Sequential workflow execution with sub-workflow chaining (`Call /name`); CI for unattended jobs | `.windsurfrules` is a workflow file or workflows bypass approval prompts |
+| Kiro | Steering file with `inclusion: manual` (`.kiro/steering/` → `/name`) | Custom Agent (`.kiro/agents/`) for tool-governed multi-step work; hooks (`.kiro/hooks/`) for events | A separate `.kiro/workflows/` directory exists |
+| Google Agents CLI (Gemini CLI) | TOML command (`.gemini/commands/` → `/name`) or Agent Skill | ADK Python agent project (`agents-cli create/eval/run/deploy`) for orchestrated cloud workflows | A prompt file alone deploys an ADK agent without Python code |
 
 ## Antigravity
 
 Antigravity has a native workflow model: Markdown files with a title, description, and ordered instructions. Create it through the Agent panel’s **Customizations → Workflows** panel, choosing **Global** or **Workspace**. Invoke it as `/workflow-name`; one workflow may call another. Keep each workflow below the documented 12,000-character limit.
 
-Write a short title/description and an ordered body using the workflow outline. Make deployment, notification, or publish steps approval-gated. Verify it appears in the Agent slash-command list, then run it with a non-production input.
+Write a short title/description and an ordered body using [the workflow outline](../templates/workflow-outline.md). Make deployment, notification, or publish steps approval-gated. Verify it appears in the Agent slash-command list, then run it with a non-production input.
 
 Source: [Antigravity Workflows](https://antigravity.google/docs/ide/workflows?app=antigravity-ide).
 
@@ -75,3 +80,67 @@ Orca is a worktree-native IDE for launching existing CLI agents; it does not doc
 Before modifying Orca, use the `orca-cli` skill for automations or the `orchestration` skill for task graphs. Each loads the current binary’s version-matched guide using `orca skills get ...`; do not guess commands or configuration syntax. Verify drafts with a low-risk prompt and retain human review before enabling recurring execution, mutation, or external actions.
 
 Sources: [Orca CLI overview](https://www.onorca.dev/docs/cli/overview), [Orca skills registry and orchestration](https://www.onorca.dev/docs/cli/skills), [Orca worktrees](https://www.onorca.dev/docs/model/worktrees).
+
+## Cursor
+
+In Cursor, repeatable manual workflows are defined as **Markdown commands** in `.cursor/commands/<name>.md` for a project or `~/.cursor/commands/<name>.md` globally. The filename stem becomes the `/name` slash command in Cursor Chat, Agent, and Composer. The file body contains ordered, step-by-step instructions.
+
+For a richer, context-dependent procedure that includes supporting scripts or reference files, create an **Agent Skill** in `.cursor/skills/<name>/SKILL.md` or `.agents/skills/<name>/SKILL.md` with `disable-model-invocation: true`.
+
+Cursor rules (`.cursor/rules/<name>.mdc`) serve a different purpose: they provide persistent, always-on or glob-matched project context and coding conventions to any active mode; they are not invocation-triggered workflows. Custom Modes (configured in Settings → Features → Chat → Custom Modes) define agent personas with tool permission boundaries, but are UI-configured rather than version-controlled workflow files.
+
+Use [the Cursor workflow template](../templates/cursor-workflow.md). Keep workflow files concise and focused. Verify by confirming the command appears in the `/` autocomplete list in Cursor Chat and executing it with a read-only input.
+
+Sources: [Cursor Custom Commands](https://www.cursor.com/chat/commands), [Cursor Agent Skills](https://cursor.com/docs/skills), [Cursor Rules](https://www.cursor.com/en/docs/context/rules).
+
+## GitHub Copilot / VS Code
+
+In GitHub Copilot and VS Code, user-invoked prompt workflows are defined as **Prompt Files** (`.prompt.md`) located in `.github/prompts/<name>.prompt.md` (project) or the VS Code user profile (global). The filename stem becomes the `/name` slash command in Copilot Chat.
+
+To turn a prompt file into an autonomous, multi-step agentic workflow, set `agent: "agent"` and specify allowed `tools` (e.g. `[search, codebase, fetch]`) in the YAML frontmatter. Enable prompt files by setting `"chat.promptFiles": true` in VS Code `settings.json`.
+
+For automated, scheduled, or event-driven repository workflows (e.g. nightly builds, PR validation, automated releases), use **GitHub Actions** (`.github/workflows/*.yml`) or Copilot Workspace agents. For deterministic editor build and test tasks, use VS Code tasks (`.vscode/tasks.json`). `copilot-instructions.md` provides always-on repository context, not an on-demand workflow.
+
+Use [the Copilot prompt workflow template](../templates/copilot-prompt-workflow.md). Verify by typing `/` in Copilot Chat, confirming the workflow command appears, and running a test execution with read-only inputs.
+
+Sources: [GitHub Copilot Prompt Files](https://code.visualstudio.com/docs/copilot/copilot-customization#_prompt-files), [VS Code Copilot Customization](https://code.visualstudio.com/docs/copilot/copilot-customization).
+
+## Windsurf
+
+Windsurf provides a native **Workflows** feature. Workflows are Markdown files located in `.windsurf/workflows/<name>.md` at the project level, or created via the IDE through **Customizations → Workflows → + Workflow**. The filename stem becomes the `/name` slash command in Cascade chat.
+
+When invoked, Cascade executes the ordered steps in the workflow file sequentially. Workflows can reference and chain other workflows by including instructions such as "Call /<sub-workflow-name>".
+
+For always-on project rules and style guidelines, use `.windsurfrules`. For cross-project persistent standards, use global memories (`~/.codeium/windsurf/memories/global_rules.md`). Workflows do not bypass Cascade's safety prompts for destructive edits or terminal execution.
+
+Use [the Windsurf workflow template](../templates/windsurf-workflow.md). Verify by checking that the workflow appears in Cascade's `/` autocomplete list and running a representative test with non-destructive inputs.
+
+Sources: [Windsurf Workflows](https://docs.windsurf.com/windsurf/customization), [Windsurf Memories and Rules](https://docs.windsurf.com/windsurf/memories-and-rules).
+
+## Kiro
+
+Kiro supports two primary native workflow mechanisms depending on complexity:
+
+1. **Manual Steering Workflows (`.kiro/steering/<name>.md`)**: for prompt-based, on-demand procedures. Set `inclusion: manual` in the YAML frontmatter. The filename stem becomes the `/name` slash command in Kiro agent chat. When invoked, Kiro injects the ordered procedural instructions into the agent context.
+2. **Custom Agents (`.kiro/agents/<name>.json` or `.kiro/agents/<name>.md`)**: for multi-step, tool-using, or governed workflows. Configure specific tool capabilities (`read`, `write`, `shell`), permission rules, resources (including steering files), and model parameters.
+3. **Event-driven workflows**: use **Kiro hooks** (`.kiro/hooks/*.json`) for automated reactions to IDE lifecycle events (e.g. `PostFileSave`, `PreToolUse`).
+
+Do not claim that a separate `.kiro/workflows/` directory exists. Use [the Kiro steering workflow template](../templates/kiro-steering-workflow.md). Verify by typing `/` in Kiro chat, selecting the workflow, and running a harmless test prompt.
+
+Sources: [Kiro Steering](https://kiro.dev/docs/steering/), [Kiro Custom Agents](https://kiro.dev/docs/agents/custom-agents), [Kiro Slash Commands](https://kiro.dev/docs/slash-commands/).
+
+## Google Agents CLI (and Gemini CLI)
+
+There are two distinct workflow surfaces to understand:
+
+1. **Google Agents CLI (`google-agents-cli` / ADK)**: A full lifecycle framework for building, evaluating, and deploying production agent workflows implemented with the **Google Agent Development Kit (ADK)** in Python (`agent.py`, `pyproject.toml`, `DESIGN_SPEC.md`). Use this for multi-step agent graphs, orchestrated tool pipelines, and cloud-deployed workflows.
+   - Scaffold with `agents-cli create <workflow-name>`.
+   - Specify the design in `DESIGN_SPEC.md` using [the Google Agents CLI workflow spec template](../templates/google-agents-cli-workflow-spec.md).
+   - Evaluate multi-step behavior with `agents-cli eval --agent <name> --test-set evals/<name>_eval.json`.
+   - Run locally with `agents-cli run --agent <name>`.
+   - Deploy to Cloud Run or Google Cloud Agent Platform with `agents-cli deploy`. Running `uvx google-agents-cli setup` injects ADK workflow skills into supported coding assistants.
+2. **Gemini CLI Custom Commands (`.gemini/commands/<name>.toml`)**: For compact, user-invoked prompt workflows in the Gemini CLI. Create `.gemini/commands/<name>.toml` (project) or `~/.gemini/commands/<name>.toml` (global). The filename becomes `/name` (or `/subfolder:name` for subdirectories). Use `prompt` with `{{args}}` argument placeholders and optional `description`. Reload with `/commands reload`. Use [the Gemini CLI workflow template](../templates/gemini-cli-workflow.toml).
+
+Do not claim that a Markdown or TOML file alone deploys an ADK agent workflow without Python code. Require explicit user approval before triggering cloud deployment, publishing to the Gemini Enterprise Agent Registry, or enabling external writes.
+
+Sources: [google-agents-cli](https://github.com/google/agents-cli), [ADK documentation](https://google.github.io/adk-docs/), [Gemini CLI Commands](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/commands.md), [Gemini CLI Configuration](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md).

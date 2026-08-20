@@ -1,0 +1,21 @@
+description = "{{ONE_LINE_WORKFLOW_DESCRIPTION}}"
+
+prompt = """
+# {{WORKFLOW_TITLE}}
+
+**Purpose:** {{ONE_SENTENCE_DESCRIPTION}}
+
+Inputs: {{args}}
+
+## Procedure
+
+1. Inspect {{FILES_OR_CONTEXT_BASED_ON_ARGS}}. Stop if inputs are invalid or missing.
+2. Perform {{ORDERED_ANALYSIS_OR_ACTION}}.
+3. Verify {{SUCCESS_CRITERION}}.
+4. Return {{EXPECTED_DELIVERABLE_FORMAT}}.
+
+## Boundaries
+
+- Do not perform destructive edits or execute unverified shell commands without confirmation.
+- Stop and ask before any deployment, publication, or external API write.
+"""
