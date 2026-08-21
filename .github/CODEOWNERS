@@ -1,0 +1,9 @@
+# CODEOWNERS
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Author: Sven Kalbhenn <https://www.skom.de>
+#
+# Last matching rule wins. The catch-all rule below assigns every file
+# in this repository to @Starraider.
+
+* @Starraider
