@@ -77,7 +77,7 @@ Research was verified on 2026-08-20 against the primary documentation linked in 
 ## Related skills
 
 - [`new-skill`](../new-skill/README.md) to author reusable instructions instead of deterministic event code.
-- [`agent-plugin-builder`](../agent-plugin-builder/README.md) to package a portable Skill and supported client components.
+- [`new-plugin`](../new-plugin/README.md) to package a portable Skill and supported client components.
 
 ## License
 

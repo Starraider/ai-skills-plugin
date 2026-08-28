@@ -86,9 +86,9 @@ Turn a vague or recurring AI-IDE problem into an evidence-backed capability cont
    - workflow → `new-workflow`
    - hook → `new-hook`
    - specialized agent → `new-agent`
-   - Agent Plugin packaging → `agent-plugin-builder`
+   - Agent Plugin packaging → `new-plugin`
 
-   For a combination, list the skills in implementation order and assign each a non-overlapping deliverable. Put `agent-plugin-builder` last when it packages artifacts created by other builders.
+   For a combination, list the skills in implementation order and assign each a non-overlapping deliverable. Put `new-plugin` last when it packages artifacts created by other builders.
 
    Make the prompt self-contained: include the target product and scope, evidence, desired behavior, selected architecture, required inputs and capabilities, permissions and approval gates, artifacts to preserve, deliverables, and acceptance tests. Tell the implementing agent to inspect existing files and applicable repository instructions, verify current target support through the named builder skills, avoid undocumented substitutes, and report validation results. Use descriptive placeholders only for facts the user deliberately chose to defer.
 

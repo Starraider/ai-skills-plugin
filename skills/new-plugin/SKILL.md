@@ -1,10 +1,10 @@
 ---
-name: agent-plugin-builder
+name: new-plugin
 description: Create, package, migrate, release, or validate portable Agent Plugins 1.0.0 containing Agent Skills and optional MCP servers. Use when building an agent plugin, adding plugin.json or mcp.json, converting a client-specific plugin to the open standard, producing a clean archive, or auditing v1 conformance. Do not use for purely client-owned installation or enablement.
 license: CC-BY-4.0
 ---
 
-# Agent Plugin Builder
+# New Plugin
 
 ## Outcome
 

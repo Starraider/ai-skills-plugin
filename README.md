@@ -13,11 +13,11 @@ A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing 
 
 | Skill | Purpose |
 | --- | --- |
-| [`agent-plugin-builder`](skills/agent-plugin-builder/README.md) | Create, migrate, validate, package, and release Agent Plugins 1.0.0. |
 | [`improve-my-ai-harness`](skills/improve-my-ai-harness/README.md) | Diagnose an AI-IDE problem, select the smallest suitable harness mechanism or combination, and produce a builder-routed implementation prompt. |
 | [`new-agent`](skills/new-agent/README.md) | Create least-privilege, IDE-native agents for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-agents-md`](skills/new-agents-md/README.md) | Create concise, target-aware `AGENTS.md` repository instructions for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-hook`](skills/new-hook/README.md) | Decide whether an event hook is appropriate and create a target-native hook or supported alternative. |
+| [`new-plugin`](skills/new-plugin/README.md) | Create, migrate, validate, package, and release Agent Plugins 1.0.0. |
 | [`new-prompt`](skills/new-prompt/README.md) | Create and improve ready-to-use LLM prompts. |
 | [`new-skill`](skills/new-skill/README.md) | Create, validate, evaluate, and package portable Agent Skills. |
 | [`new-slash-command`](skills/new-slash-command/README.md) | Decide whether a reusable task should be a slash command and create the target-native command or supported alternative. |
@@ -30,7 +30,7 @@ Compatible clients discover each immediate child of `skills/` that contains a va
 From the plugin root, run:
 
 ```bash
-python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
+python3 skills/new-plugin/scripts/validate_agent_plugin.py . --strict
 ```
 
 Validate individual Skills with the Agent Skills reference validator or their own bundled validation commands.
@@ -38,7 +38,7 @@ Validate individual Skills with the Agent Skills reference validator or their ow
 Create a deterministic portable archive and validate the extracted copy with:
 
 ```bash
-python3 skills/agent-plugin-builder/scripts/package_agent_plugin.py . \
+python3 skills/new-plugin/scripts/package_agent_plugin.py . \
   --output /tmp/ai-skills-plugin.zip
 ```
 

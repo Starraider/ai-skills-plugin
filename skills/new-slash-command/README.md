@@ -61,7 +61,7 @@ From the plugin root, validate the portable structure:
 ```bash
 skills/new-skill/scripts/validate-skill.sh skills/new-slash-command \
   --clients codex,antigravity,opencode,qoder,cursor,copilot,windsurf,kiro,gemini-cli
-python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
+python3 skills/new-plugin/scripts/validate_agent_plugin.py . --strict
 ```
 
 Then use the target-specific discovery and behavioral checks in [target command formats and research](references/target-command-formats.md). Test a low-risk invocation and an invalid, missing, or approval-required input.

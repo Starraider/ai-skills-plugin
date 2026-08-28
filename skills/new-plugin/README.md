@@ -1,4 +1,4 @@
-# agent-plugin-builder
+# new-plugin
 
 Create, package, migrate, release, and validate portable Agent Plugins 1.0.0 without confusing the portable standard with client-owned behavior.
 
@@ -54,7 +54,7 @@ Inside any Agent Plugins 1.0.0 package, this skill must be at the standard
 discovery path:
 
 ```text
-<plugin-root>/skills/agent-plugin-builder/
+<plugin-root>/skills/new-plugin/
 ```
 
 The directory must contain `SKILL.md` directly beneath it. A skills-capable
@@ -63,12 +63,12 @@ standard intentionally leaves client installation and enablement UX unspecified.
 
 For the **ChatGPT Desktop App**, which does not load local filesystem Agent
 Plugins packages directly, install this skill through the Skill installation
-flow: upload the complete `skills/agent-plugin-builder/` directory (with all
+flow: upload the complete `skills/new-plugin/` directory (with all
 supporting scripts and references) via **Plugins → Skills → Create → Upload
 from your computer**.
 
 For standalone development in this repository, use the
-`skills/agent-plugin-builder/` directory as the skill source.
+`skills/new-plugin/` directory as the skill source.
 
 
 ## Example prompts
@@ -84,21 +84,21 @@ Validate this authoring skill:
 
 ```bash
 skills/new-skill/scripts/validate-skill.sh \
-  skills/agent-plugin-builder \
+  skills/new-plugin \
   --strict-portable
 ```
 
 Validate a generated Agent Plugin without executing its code or contacting remote servers:
 
 ```bash
-python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py \
+python3 skills/new-plugin/scripts/validate_agent_plugin.py \
   /path/to/plugin
 ```
 
 Build and validate a deterministic portable archive:
 
 ```bash
-python3 skills/agent-plugin-builder/scripts/package_agent_plugin.py \
+python3 skills/new-plugin/scripts/package_agent_plugin.py \
   /path/to/plugin --output /tmp/plugin.zip
 ```
 

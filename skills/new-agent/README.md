@@ -65,7 +65,7 @@ The product-specific formats were checked on 2026-08-20 against current document
 ## Related skills
 
 - [`new-skill`](../new-skill/README.md) for a reusable Agent Skill instead of an IDE-native agent.
-- [`agent-plugin-builder`](../agent-plugin-builder/README.md) for packaging Skills and supported components into a portable Agent Plugin.
+- [`new-plugin`](../new-plugin/README.md) for packaging Skills and supported components into a portable Agent Plugin.
 
 ## License
 

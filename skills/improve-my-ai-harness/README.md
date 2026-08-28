@@ -72,7 +72,7 @@ From the plugin root, run:
 ```bash
 skills/new-skill/scripts/validate-skill.sh skills/improve-my-ai-harness --strict-portable
 skills-ref validate skills/improve-my-ai-harness
-python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
+python3 skills/new-plugin/scripts/validate_agent_plugin.py . --strict
 ```
 
 Behavioral cases are maintained in `evals/evals.json`. They cover iterative discovery, a layered recommendation, a deterministic hook decision, and a request that should route directly to another builder.
@@ -86,7 +86,7 @@ Behavioral cases are maintained in `evals/evals.json`. They cover iterative disc
 - [`new-workflow`](../new-workflow/README.md) implements a selected workflow or documented target alternative.
 - [`new-hook`](../new-hook/README.md) implements a selected event hook or documented target alternative.
 - [`new-agent`](../new-agent/README.md) implements a selected specialized agent.
-- [`agent-plugin-builder`](../agent-plugin-builder/README.md) packages and validates selected portable components.
+- [`new-plugin`](../new-plugin/README.md) packages and validates selected portable components.
 
 ## License
 

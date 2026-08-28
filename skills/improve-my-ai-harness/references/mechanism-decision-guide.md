@@ -13,7 +13,7 @@ Use this guide only after the interview has produced a capability contract. A me
 | Workflow | A repeatable multi-step process, handoff, schedule, API/event trigger, approval path, or orchestration has an observable output and stop conditions. | Any reusable checklist is called a workflow; a Skill or command may be smaller. | `new-workflow` |
 | Hook | A documented lifecycle event must trigger fast, deterministic, bounded, and testable observation, transformation, or blocking. | The desired behavior requires model judgment or the target has no event at the required boundary. | `new-hook` |
 | Specialized agent | A standing specialist needs a distinct responsibility, tool and permission boundary, context, model/profile, ownership, or delegation role. | A persona sounds attractive or reusable instructions would be sufficient. | `new-agent` |
-| Agent Plugin | Multiple portable Skills or MCP servers need one reusable, validated distribution package. | One artifact needs behavior; a plugin is a container, not an autonomous capability. | `agent-plugin-builder` |
+| Agent Plugin | Multiple portable Skills or MCP servers need one reusable, validated distribution package. | One artifact needs behavior; a plugin is a container, not an autonomous capability. | `new-plugin` |
 
 ## Capability-to-mechanism signals
 
@@ -60,6 +60,6 @@ The handoff prompt must explicitly name each selected builder skill and its deli
 - “Use the installed `new-skill` Agent Skill to create and validate the reusable review procedure described below.”
 - “Use `new-agents-md` first for repository-wide facts, then `new-skill` for the invoked migration-review procedure. Do not duplicate instructions between them.”
 - “Use `new-hook` to verify that Codex exposes the required pre-action event and implement the deterministic guard. If unsupported, report the limitation rather than inventing configuration.”
-- “Use `new-skill` to build the portable capability, then `agent-plugin-builder` to add it to a validated Agent Plugin for distribution.”
+- “Use `new-skill` to build the portable capability, then `new-plugin` to add it to a validated Agent Plugin for distribution.”
 
 Names are portable references to installed skills. The target client may expose them through `$name`, `/name`, `@name`, or automatic discovery; do not hard-code one invocation syntax unless the target requires it.

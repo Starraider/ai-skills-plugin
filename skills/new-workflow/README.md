@@ -65,7 +65,7 @@ From the repository root, validate the portable structure:
 ```bash
 skills/new-skill/scripts/validate-skill.sh skills/new-workflow \
   --clients codex,antigravity,opencode,qoder,cursor,copilot,windsurf,kiro,google-agents-cli
-python3 skills/agent-plugin-builder/scripts/validate_agent_plugin.py . --strict
+python3 skills/new-plugin/scripts/validate_agent_plugin.py . --strict
 ```
 
 Then complete the selected product’s discovery and low-risk execution check in [target workflow formats and research](references/target-workflow-formats.md). The included eval cases cover representative workflows, unsuitable-workflow decisions, and safety boundaries.

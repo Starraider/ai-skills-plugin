@@ -55,11 +55,11 @@ Completion: structural checks pass, links resolve, target clients can discover t
 
 ## 6. Package and close out
 
-For standalone distribution, read [repository and distribution guidance](references/repository-distribution.md) and use the [packager](scripts/package-skill.py) when a `.skill` archive is needed. For a multi-skill Agent Plugin, hand off package assembly, plugin-level validation, and release packaging to [`agent-plugin-builder`](../agent-plugin-builder/README.md). Prune duplication, stale material, no-op instructions, and unsupported claims. Update owning documentation and report validation plus any intentional exceptions.
+For standalone distribution, read [repository and distribution guidance](references/repository-distribution.md) and use the [packager](scripts/package-skill.py) when a `.skill` archive is needed. For a multi-skill Agent Plugin, hand off package assembly, plugin-level validation, and release packaging to [`new-plugin`](../new-plugin/README.md). Prune duplication, stale material, no-op instructions, and unsupported claims. Update owning documentation and report validation plus any intentional exceptions.
 
 Completion: source, documentation, package contents, and release metadata agree.
 
 ## Handoffs
 
 - If it is unclear whether the requested behavior should be a Skill, prompt, instruction file, command, workflow, hook, or specialist agent, use [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) before authoring an artifact.
-- Use [`agent-plugin-builder`](../agent-plugin-builder/README.md) when this Skill belongs in a portable multi-skill Agent Plugin.
+- Use [`new-plugin`](../new-plugin/README.md) when this Skill belongs in a portable multi-skill Agent Plugin.
