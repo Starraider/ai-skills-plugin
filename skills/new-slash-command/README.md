@@ -70,6 +70,8 @@ Research was verified on 2026-08-20 against the primary documentation linked in 
 
 ## Related skills
 
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) to decide whether a slash command or another harness mechanism is the right fit.
+- [`new-prompt`](../new-prompt/README.md) for one-off task prompts rather than reusable client command shortcuts.
 - [`new-skill`](../new-skill/README.md) for reusable instructions that need supporting scripts or richer context.
 - [`new-workflow`](../new-workflow/README.md) for scheduled, multi-step, or multi-agent work.
 - [`new-agent`](../new-agent/README.md) for a long-lived specialist with its own tools and boundary.

@@ -64,6 +64,8 @@ The product-specific formats were checked on 2026-08-20 against current document
 
 ## Related skills
 
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) to diagnose whether a dedicated agent or a simpler harness mechanism (skill, rule, prompt) is needed.
+- [`new-agents-md`](../new-agents-md/README.md) for repository-wide agent instructions rather than a dedicated specialist agent profile.
 - [`new-skill`](../new-skill/README.md) for a reusable Agent Skill instead of an IDE-native agent.
 - [`new-plugin`](../new-plugin/README.md) for packaging Skills and supported components into a portable Agent Plugin.
 

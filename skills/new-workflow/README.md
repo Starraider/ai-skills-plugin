@@ -76,6 +76,7 @@ The target formats were researched on 2026-08-20 against primary documentation: 
 
 ## Related skills
 
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) to decide whether an ordered workflow or another harness mechanism is the right fit.
 - [`new-skill`](../new-skill/README.md) for reusable, context-dependent agent instructions.
 - [`new-agent`](../new-agent/README.md) for a long-lived specialist with a tool boundary.
 - [`new-hook`](../new-hook/README.md) for deterministic lifecycle reactions rather than an ordered workflow.

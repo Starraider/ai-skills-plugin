@@ -76,6 +76,8 @@ Research was verified on 2026-08-20 against the primary documentation linked in 
 
 ## Related skills
 
+- [`improve-my-ai-harness`](../improve-my-ai-harness/README.md) to diagnose whether an event hook or another mechanism is the right fit.
+- [`new-workflow`](../new-workflow/README.md) for ordered multi-step tasks rather than lifecycle-event reactions.
 - [`new-skill`](../new-skill/README.md) to author reusable instructions instead of deterministic event code.
 - [`new-plugin`](../new-plugin/README.md) to package a portable Skill and supported client components.
 
