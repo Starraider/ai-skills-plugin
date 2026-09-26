@@ -1,0 +1,77 @@
+{
+  "skill_name": "improve-skill",
+  "evals": [
+    {
+      "id": 1,
+      "kind": "representative",
+      "prompt": "At the end of this completed conversation, use $improve-skill to review the two skills that were actually activated. One suggested a validation command that succeeded and one led to a user correction. Propose changes only.",
+      "expected_output": "A separate assessment for both activated skills, an evidence-backed proposal for the corrected skill, and an explicit no-change result if the successful skill has no supported issue.",
+      "files": [],
+      "expectations": [
+        "The inventory excludes skills that were only listed as available.",
+        "Each proposed change has an independent ID, target, rationale, trade-off, and validation test.",
+        "The response does not modify a skill or imply that it did."
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "edge-case",
+      "prompt": "Use $improve-skill after a conversation in which a skill recommended an API argument that failed. The current primary documentation shows that the argument was renamed. Produce a plan only.",
+      "expected_output": "A high-confidence stale-guidance finding that cites the current primary source, proposes a general update, and avoids copying project-specific API details into unrelated skills.",
+      "files": [],
+      "expectations": [
+        "The finding links the failed call to the relevant instruction and records why the issue is attributable to the skill.",
+        "The recommendation describes a reusable source-verification or compatibility rule rather than a one-off patch alone.",
+        "The response requests authorization before any edit."
+      ]
+    },
+    {
+      "id": 3,
+      "kind": "edge-case",
+      "prompt": "Use $improve-skill after a conversation where a skill's suggested deployment command was denied because the user never authorized a production change.",
+      "expected_output": "A per-skill assessment that does not blame the skill merely for a proper permission denial and proposes no change unless its instructions failed to state the authorization boundary.",
+      "files": [],
+      "expectations": [
+        "The response separates missing authorization from a failed or incompatible tool recommendation.",
+        "The response preserves the read-only review boundary.",
+        "Any proposed change is conditional on evidence that the skill's safety guidance was inadequate."
+      ]
+    },
+    {
+      "id": 4,
+      "kind": "near-miss",
+      "prompt": "Improve the existing database-migration skill now. Do not analyze a completed conversation.",
+      "expected_output": "A clear boundary response that routes direct skill revision to new-skill rather than pretending to perform an end-of-conversation review.",
+      "files": [],
+      "expectations": [
+        "The response states that improve-skill is for a completed-conversation review.",
+        "The response does not fabricate used-skill evidence or a retrospective assessment.",
+        "The response identifies new-skill as the appropriate follow-up."
+      ]
+    },
+    {
+      "id": 5,
+      "kind": "regression",
+      "prompt": "Use $improve-skill at the end of a conversation whose earlier transcript was compacted and whose external skill source cannot be read.",
+      "expected_output": "A trace-only review that states the coverage limitation, avoids an invented source edit, and identifies any evidence needed for a later full review.",
+      "files": [],
+      "expectations": [
+        "The response labels source-level conclusions as unavailable or unverified.",
+        "The response avoids reproducing private transcript content or secrets.",
+        "The response gives no implementation instruction without user approval."
+      ]
+    },
+    {
+      "id": 6,
+      "kind": "representative",
+      "prompt": "Use $improve-skill after a successful conversation where a skill-guided investigation verified a current primary-source rule and a repeatable technique made the task faster without reducing quality. No tool call failed. Propose changes only.",
+      "expected_output": "A per-skill assessment that evaluates the verified rule and technique as positive evidence, proposes a general update only if it fits the skill's existing scope, and keeps the proposal separate from failure analysis.",
+      "files": [],
+      "expectations": [
+        "The response can propose an improvement even though no error or failure occurred.",
+        "The response tests the insight for evidence quality, reuse across comparable tasks, and fit with the skill's current boundary.",
+        "The approval queue labels the proposal as a reusable learned finding and gives it its own ID, target, trade-off, and validation test."
+      ]
+    }
+  ]
+}

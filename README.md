@@ -1,6 +1,6 @@
 # AI Skills Plugin
 
-A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing reusable Agent Skills for AI-harness diagnosis, prompt design, IDE-native agent, hook, and slash-command creation, Skill authoring, and Agent Plugin creation.
+A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing reusable Agent Skills for AI-harness diagnosis, prompt design, IDE-native agent, hook, and slash-command creation, Skill authoring and upkeep, and Agent Plugin creation.
 
 ## Installation
 
@@ -14,6 +14,7 @@ A portable [Agent Plugins 1.0.0](https://agent-plugins.org/) package containing 
 | Skill | Purpose |
 | --- | --- |
 | [`improve-my-ai-harness`](skills/improve-my-ai-harness/README.md) | Diagnose an AI-IDE problem, select the smallest suitable harness mechanism or combination, and produce a builder-routed implementation prompt. |
+| [`improve-skill`](skills/improve-skill/README.md) | Review Skills used in a completed conversation and produce an approval-ready, general-purpose improvement plan without editing them. |
 | [`new-agent`](skills/new-agent/README.md) | Create least-privilege, IDE-native agents for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-agents-md`](skills/new-agents-md/README.md) | Create concise, target-aware `AGENTS.md` repository instructions for Antigravity, Codex, ChatGPT, Zed, OpenCode, Qoder, or Orca. |
 | [`new-hook`](skills/new-hook/README.md) | Decide whether an event hook is appropriate and create a target-native hook or supported alternative. |

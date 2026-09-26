@@ -1,0 +1,8 @@
+interface:
+  display_name: "Improve Skill"
+  short_description: "Review skills used in a conversation and propose updates."
+  default_prompt: "Review the skills used in this completed conversation. Propose an approval-ready plan only; do not modify any skills."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false
