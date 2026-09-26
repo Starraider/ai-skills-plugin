@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Starraider/ai-skills-plugin/compare/v1.0.0...v1.1.0) (2026-09-26)
+
+
+### Features
+
+* New improve-skill skill. ([0a67bb5](https://github.com/Starraider/ai-skills-plugin/commit/0a67bb5b83ccad07ae4e0e0b16d1b8743d3f849f))
+
 ## 1.0.0 (2026-09-24)
 
 
